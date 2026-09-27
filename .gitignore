@@ -1,0 +1,32 @@
+# Environment / secrets
+.env
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+*.egg-info/
+
+# Airflow local runtime artifacts
+airflow.db
+airflow.cfg
+airflow-webserver.pid
+logs/
+
+# Data (raw/staging/curated hold real or generated data; keep the folders, not the contents)
+raw/*
+!raw/.gitkeep
+staging/*
+!staging/.gitkeep
+curated/*
+!curated/.gitkeep
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
+
+# Docker
+*.log
