@@ -1,9 +1,9 @@
 # Transformation Specification (Staging → Curated)
 
-**Status:** Day 1 specification only. No transformation code exists yet — it depends on
-Person A's ingestion/raw layer, which is not built as of Day 1. This document exists so
-Person A's ingestion output has a target shape to match, and so Person C's ERD/contract
-can be checked against it.
+**Status:** Updated Day 2. Person A's raw ingestion now exists and has been run against the
+real source files, so §4 below is updated from "proposed" to confirmed real column names —
+this still describes intended staging/curated logic only. No staging or curated
+transformation **code** has been written; that remains Day 3 scope.
 
 ## 1. Deduplication key
 
@@ -43,39 +43,50 @@ prior profiling discussion) are treated as their **own valid category**, not imp
 dropped, and not merged into another category. Any validation check on accepted values for
 these fields must include `unknown` in the accepted set.
 
-## 4. Expected staging output shape
+## 4. Raw interaction table — confirmed real column list (Day 2)
 
-This section is necessarily incomplete as of Day 1: no raw data has been ingested yet in
-this repository, and no source file is present to inspect directly. The fields listed below
-reflect the columns discussed in prior project planning (user, video, interaction, and
-attribute fields), **not a confirmed schema read from an actual file**. Person A's ingestion
-step should be treated as the authority on the real column names, types, and completeness
-once it exists.
+Confirmed by running `scripts/ingest.py` against the real `interaction_sampled.csv`
+(794,053 data rows, matches earlier profiling exactly). This is the actual header row, not
+a proposal:
 
-| Field (proposed) | Type (proposed) | Notes |
+```
+user_id, pid, author_id, category_id, category_level, parent_id, root_id, exposed_time,
+author_fans_count, watch_time, duration, cvm_like, click, comment, follow, collect,
+forward, hate, tag_name, title, p_hour, p_date, gender, age, mod_price, fre_city,
+fre_community_type, fre_city_level
+```
+
+Notes on fields relevant to staging/curated logic:
+
+| Field | Type (observed) | Notes |
 |---|---|---|
 | `user_id` | integer | part of dedup key |
-| `pid` (video id) | integer | part of dedup key |
-| `exposed_time` | timestamp/int | part of dedup key |
-| `watch_time` | numeric | retained even when > duration; see §2 |
-| `duration` | numeric | video duration |
-| `is_rewatch_flagged` | boolean | derived; threshold TBD |
-| `hate` | boolean | sparse; treat as rare-event rate downstream, not per-session trend |
-| `p_date`, `p_hour` | date/int | hour range and date coverage depend on the actual raw file; not assumed here |
-| gender, age, city/community/city-level fields | mixed | `unknown` retained per §3 |
-| category/tag fields | string/id | subject to the category lookup table, not yet ingested |
+| `pid` | integer | video id; part of dedup key |
+| `exposed_time` | integer (unix timestamp) | part of dedup key |
+| `watch_time` | integer (seconds) | retained even when > duration; see §2 |
+| `duration` | float (seconds) | video duration |
+| `hate` | boolean (`True`/`False` strings) | sparse — 431 of 794,053 rows (0.05%); treat as rare-event rate downstream, not per-session trend |
+| `p_date` | integer, `YYYYMMDD` | 7 distinct values, 20220916–20220922; used as the raw-layer partition key |
+| `p_hour` | integer | present per row |
+| `gender`, `age`, `mod_price`, `fre_city`, `fre_community_type`, `fre_city_level` | mixed | `unknown` retained per §3 where present |
+| `category_id`, `category_level`, `parent_id`, `root_id` | integer | join against `categories_cn_en.csv` |
+| `tag_name`, `title` | text (Chinese) | **`title` can contain commas and embedded newlines inside quoted CSV values** — confirmed in 87 of 794,053 rows for embedded newlines. Any staging code must use a real CSV parser (e.g. Python's `csv` module or pandas), never naive comma/line splitting, or these rows will be silently corrupted. |
+| `cvm_like`, `click`, `comment`, `follow`, `collect`, `forward` | boolean | other interaction flags, not yet assigned a specific curated use beyond what's noted in `data-contract-daily-user-features.md` |
 
-**Explicitly unresolved / TBD:**
-- Full, confirmed column list and types (depends on Person A's actual raw ingestion output).
-- Final dedup tie-breaking procedure.
-- Rewatch-flag threshold.
-- Whether `hate` and other interaction flags need any additional handling beyond what's
-  noted here, once real data volumes are visible in this repository's raw layer.
+`is_rewatch_flagged` is not a raw column — it remains a **derived** field planned for the
+staging/curated step (§2), not present in the source data.
 
-## 5. Explicitly out of scope for Day 1
+## 5. Still unresolved / TBD (Day 3 scope)
 
-- No staging code, no curated feature code, no validation checks are implemented as part of
-  this document. This is a specification only.
-- No claim is made that any of the figures referenced in earlier project discussion (row
-  counts, duplicate percentages, etc.) have been verified against data in this repository —
-  no source data is present here as of Day 1.
+- Final dedup tie-breaking procedure when rows share the `(user_id, pid, exposed_time)` key
+  but differ only in tag-related columns.
+- Rewatch-flag threshold (`watch_time > duration` vs. `watch_time > 2 * duration`).
+- Late-night window boundaries and session definition (see also
+  `data-contract-daily-user-features.md`).
+
+## 6. Explicitly out of scope for Day 2
+
+- No staging code, no curated feature code, no validation-check code exist yet. This remains
+  a specification, now updated with confirmed real column data. Staging code is Day 3 scope.
+- The `categories_cn_en.csv` join and the transcript word-count feature are not yet
+  implemented in code — only ingested as raw files (see `data-sources-setup.md`).

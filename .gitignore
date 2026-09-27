@@ -23,6 +23,11 @@ staging/*
 curated/*
 !curated/.gitkeep
 
+# Local source-data input for ingest.py. Never committed — the interaction CSV
+# is ~160MB, over GitHub's per-file limit, and raw source data shouldn't live
+# in git regardless of size. Each teammate places their own copy here locally.
+data_sources/
+
 # OS / editor
 .DS_Store
 .vscode/
