@@ -29,7 +29,7 @@ interactions_curated
   watch_time
   is_rewatch_flagged        -- boolean, derived; see transformation-spec.md §2
   hate
-  click, comment, forward, cvm_like   -- proposed, pending confirmation against real raw columns
+  click, comment, forward, cvm_like, follow, collect   -- confirmed present in real raw data (see transformation-spec.md §4)
   p_date
   p_hour
   PRIMARY KEY (user_id, pid, exposed_time)   -- matches the dedup key in transformation-spec.md §1
