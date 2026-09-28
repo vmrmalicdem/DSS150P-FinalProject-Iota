@@ -1,7 +1,7 @@
 """
 Day 2 ingestion script (Person A).
 
-Reads source files from SOURCE_DATA_DIR (default: ./data_sources, gitignored —
+Reads source files from SOURCE_DATA_DIR (default: ./data_sources, gitignored -
 never committed, since the interaction file is ~160MB and exceeds what should
 ever go into this git repo) and writes a partitioned raw layer into RAW_DATA_DIR
 (default: ./raw, also gitignored per the Day 1 .gitignore).
@@ -21,16 +21,13 @@ Usage:
 
 import csv
 import json
-import os
 import shutil
 import sys
 import uuid
 from collections import defaultdict
 from datetime import datetime, timezone
-from pathlib import Path
 
-SOURCE_DATA_DIR = Path(os.environ.get("SOURCE_DATA_DIR", "./data_sources"))
-RAW_DATA_DIR = Path(os.environ.get("RAW_DATA_DIR", "./raw"))
+from config import RAW_DATA_DIR, SOURCE_DATA_DIR  # paths resolve against the repo root, not the cwd
 
 INTERACTION_FILE = SOURCE_DATA_DIR / "interaction_sampled.csv"
 CATEGORY_FILE = SOURCE_DATA_DIR / "categories_cn_en.csv"
@@ -67,13 +64,13 @@ def ingest_interactions(batch_id):
     Partition the interaction table by p_date into raw/interactions/p_date=YYYYMMDD/.
 
     Uses csv.DictReader rather than naive line-splitting because several title
-    fields in this dataset contain commas inside quoted values — a naive split
+    fields in this dataset contain commas inside quoted values - a naive split
     misparses those rows. This was confirmed against the real uploaded file
     before writing this script.
     """
     source_name = "interaction_sampled.csv"
     if not INTERACTION_FILE.exists():
-        log_event(batch_id, source_name, "MISSING", f"expected at {INTERACTION_FILE}, not found — skipped")
+        log_event(batch_id, source_name, "MISSING", f"expected at {INTERACTION_FILE}, not found - skipped")
         return
 
     out_root = RAW_DATA_DIR / "interactions"
@@ -95,7 +92,7 @@ def ingest_interactions(batch_id):
                 return
             expected_ncols = len(header)
             if "p_date" not in header:
-                log_event(batch_id, source_name, "ERROR", "expected column 'p_date' not found in header — aborting partition step")
+                log_event(batch_id, source_name, "ERROR", "expected column 'p_date' not found in header - aborting partition step")
                 return
             date_idx = header.index("p_date")
 
@@ -135,7 +132,7 @@ def ingest_categories(batch_id):
     """Copy the category lookup table as-is. Static reference data, not partitioned by date."""
     source_name = "categories_cn_en.csv"
     if not CATEGORY_FILE.exists():
-        log_event(batch_id, source_name, "MISSING", f"expected at {CATEGORY_FILE}, not found — skipped")
+        log_event(batch_id, source_name, "MISSING", f"expected at {CATEGORY_FILE}, not found - skipped")
         return
 
     out_dir = RAW_DATA_DIR / "categories"
@@ -165,12 +162,12 @@ def ingest_transcripts(batch_id):
     """
     Copy transcript .txt files as-is. Locked scope reminder: this pipeline only
     ever computes file-existence and word/character count from these files in
-    later stages — no NLP, no sentiment, no topic extraction. Ingestion here is
+    later stages - no NLP, no sentiment, no topic extraction. Ingestion here is
     just a file copy with a manifest.
     """
     source_name = "asr_en (transcripts)"
     if not TRANSCRIPT_DIR.exists():
-        log_event(batch_id, source_name, "MISSING", f"expected directory at {TRANSCRIPT_DIR}, not found — skipped")
+        log_event(batch_id, source_name, "MISSING", f"expected directory at {TRANSCRIPT_DIR}, not found - skipped")
         return
 
     txt_files = sorted(TRANSCRIPT_DIR.glob("*.txt"))
@@ -202,7 +199,7 @@ def main():
     print(f"Raw output dir: {RAW_DATA_DIR.resolve()}")
 
     if not SOURCE_DATA_DIR.exists():
-        log_event(batch_id, "ALL_SOURCES", "ERROR", f"SOURCE_DATA_DIR {SOURCE_DATA_DIR} does not exist — nothing to ingest")
+        log_event(batch_id, "ALL_SOURCES", "ERROR", f"SOURCE_DATA_DIR {SOURCE_DATA_DIR} does not exist - nothing to ingest")
         sys.exit(1)
 
     ingest_interactions(batch_id)
