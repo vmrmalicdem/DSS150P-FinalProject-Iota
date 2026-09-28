@@ -1,3 +1,40 @@
+# Services
+#   postgres          the warehouse (curated tables, see sql/schema.sql)
+#   airflow-db        Airflow's own metadata database (kept separate from the warehouse)
+#   airflow-init      one-shot: fixes folder permissions, migrates the metadata DB, creates the admin user
+#   airflow-webserver UI on http://localhost:${AIRFLOW_WEBSERVER_PORT:-8080}
+#   airflow-scheduler runs the DAG in dags/short_video_risk_dag.py
+#   pipeline          optional CLI runner (profile "cli"), same code as the DAG
+#
+# Start:  docker compose up -d --build        Stop:  docker compose down   (add -v to wipe databases)
+
+x-airflow-common: &airflow-common
+  build: .
+  image: shortvideo-risk-airflow:local
+  user: "${AIRFLOW_UID:-50000}:0"
+  env_file:
+    - .env
+  environment: &airflow-env
+    AIRFLOW__CORE__EXECUTOR: LocalExecutor
+    AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+    AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: "true"
+    AIRFLOW__CORE__DAGS_FOLDER: /opt/airflow/project/dags
+    AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:${AIRFLOW_DB_PASSWORD}@airflow-db:5432/airflow
+    AIRFLOW__WEBSERVER__EXPOSE_CONFIG: "false"
+    # Pipeline code reads the warehouse through the Compose service name, not localhost.
+    POSTGRES_HOST: postgres
+    POSTGRES_PORT: "5432"
+    PIPELINE_SCRIPTS_DIR: /opt/airflow/project/scripts
+    PYTHONPATH: /opt/airflow/project/scripts
+  volumes:
+    - ./:/opt/airflow/project          # code, sql, raw/, staging/, curated/, data_sources/, logs/
+    - ./logs/airflow:/opt/airflow/logs # Airflow task logs
+  depends_on:
+    airflow-db:
+      condition: service_healthy
+    postgres:
+      condition: service_healthy
+
 services:
   postgres:
     image: postgres:16
@@ -8,7 +45,7 @@ services:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
-      - "5432:5432"
+      - "${POSTGRES_PORT:-5432}:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
     healthcheck:
@@ -17,20 +54,82 @@ services:
       timeout: 5s
       retries: 5
 
-  # pipeline service: placeholder for the app/orchestration image (built from ./Dockerfile).
-  # No ingestion/transformation/Airflow behavior is wired in yet - Day 1 scope only.
-  pipeline:
-    build: .
-    container_name: shortvideo_risk_pipeline
-    depends_on:
-      postgres:
-        condition: service_healthy
-    env_file:
-      - .env
+  airflow-db:
+    image: postgres:16
+    container_name: shortvideo_risk_airflow_db
+    restart: unless-stopped
     environment:
-      POSTGRES_HOST: postgres   # service name inside the Compose network
+      POSTGRES_DB: airflow
+      POSTGRES_USER: airflow
+      POSTGRES_PASSWORD: ${AIRFLOW_DB_PASSWORD}
     volumes:
-      - ./:/app
+      - airflow-pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U airflow -d airflow"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  airflow-init:
+    <<: *airflow-common
+    container_name: shortvideo_risk_airflow_init
+    user: "0:0"                        # needs root once, to chown the bind-mounted folders
+    entrypoint: /bin/bash
+    command:
+      - -c
+      - |
+        mkdir -p /opt/airflow/project/{raw,staging,curated,logs/airflow,data_sources}
+        chown -R "${AIRFLOW_UID:-50000}:0" /opt/airflow/project/{raw,staging,curated,logs}
+        exec /entrypoint airflow version
+    environment:
+      <<: *airflow-env
+      _AIRFLOW_DB_MIGRATE: "true"
+      _AIRFLOW_WWW_USER_CREATE: "true"
+      _AIRFLOW_WWW_USER_USERNAME: ${AIRFLOW_ADMIN_USER:-admin}
+      _AIRFLOW_WWW_USER_PASSWORD: ${AIRFLOW_ADMIN_PASSWORD}
+    restart: "no"
+
+  airflow-webserver:
+    <<: *airflow-common
+    container_name: shortvideo_risk_airflow_web
+    command: webserver
+    restart: unless-stopped
+    ports:
+      - "${AIRFLOW_WEBSERVER_PORT:-8080}:8080"
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:8080/health"]
+      interval: 15s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    depends_on:
+      airflow-init:
+        condition: service_completed_successfully
+
+  airflow-scheduler:
+    <<: *airflow-common
+    container_name: shortvideo_risk_airflow_scheduler
+    command: scheduler
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "airflow jobs check --job-type SchedulerJob --hostname \"$${HOSTNAME}\""]
+      interval: 30s
+      timeout: 15s
+      retries: 5
+      start_period: 30s
+    depends_on:
+      airflow-init:
+        condition: service_completed_successfully
+
+  # Optional CLI runner, e.g.:
+  #   docker compose --profile cli run --rm pipeline python scripts/run_pipeline.py --all
+  pipeline:
+    <<: *airflow-common
+    container_name: shortvideo_risk_pipeline
+    profiles: ["cli"]
+    working_dir: /opt/airflow/project
+    command: ["python", "scripts/run_pipeline.py", "--all"]
 
 volumes:
   pgdata:
+  airflow-pgdata:
