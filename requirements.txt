@@ -1,1 +1,4 @@
-# Day 1 placeholder. Populated as ingestion/transformation/orchestration code is added.
+# Pipeline dependencies. Airflow itself is provided by the Airflow image (Day 4), not installed here.
+pandas>=2.2
+pyarrow>=15
+psycopg2-binary>=2.9

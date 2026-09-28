@@ -18,7 +18,7 @@ services:
       retries: 5
 
   # pipeline service: placeholder for the app/orchestration image (built from ./Dockerfile).
-  # No ingestion/transformation/Airflow behavior is wired in yet — Day 1 scope only.
+  # No ingestion/transformation/Airflow behavior is wired in yet - Day 1 scope only.
   pipeline:
     build: .
     container_name: shortvideo_risk_pipeline
@@ -27,6 +27,8 @@ services:
         condition: service_healthy
     env_file:
       - .env
+    environment:
+      POSTGRES_HOST: postgres   # service name inside the Compose network
     volumes:
       - ./:/app
 

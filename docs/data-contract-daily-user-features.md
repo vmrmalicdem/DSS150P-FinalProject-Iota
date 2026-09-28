@@ -1,52 +1,41 @@
-# Data Contract (Draft) — `daily_user_features`
+# Data Contract: `daily_user_features`
 
-**Status:** Draft. This table does not exist in any database as of Day 1. Nothing in this
-document has been implemented or verified against real data; it describes the intended
-target so later-day transformation and load work has something concrete to build toward.
+**Status:** Implemented in `sql/schema.sql` and produced by `scripts/curate.py`. Verified on Day 3 against the
+real sample: 25,109 rows across 7 dates, all validation gates passing. The contract is still open to change
+if the team revises a feature definition.
 
-## Grain
-
-One row per `(user_id, feature_date)` — a single user's aggregated behavior for a single
-calendar day.
-
-## Candidate key
-
-`(user_id, feature_date)` — proposed primary key, matching the ERD draft in `erd.md`.
+- **Producer:** `scripts/curate.py` (staging to curated), loaded by `scripts/load_postgres.py`.
+- **Intended consumers:** the future `risk_scores` computation, dashboards, notebooks (Parquet copy in `curated/daily_user_features/`).
+- **Grain:** one row per `(user_id, feature_date)`, only for user-days with at least one event.
+- **Primary key:** `(user_id, feature_date)`. `user_id` references `users`.
+- **Refresh:** one date partition per pipeline run. Rerunning a date replaces that date's rows.
 
 ## Fields
 
-| Field | Type (proposed) | Required | Nullable | Source / status |
+| Field | Type | Required | Nullable | Definition |
 |---|---|---|---|---|
-| `user_id` | integer | yes | no | from `users`; confirmed as a join key in prior planning, not yet verified against a real file |
-| `feature_date` | date | yes | no | derived from `p_date` in the raw interaction data (raw data not yet ingested) |
-| `late_night_share` | numeric (0-1) | proposed | TBD | fraction of watch time in a late-night window; exact window boundaries not yet decided |
-| `avg_session_length` | numeric | proposed | TBD | session definition (what counts as one session) not yet decided |
-| `hate_rate` | numeric (0-1) | proposed | TBD | per prior profiling discussion, `hate` is sparse; rate should be computed per user per day rather than assumed to have per-session stability |
-| `transcript_exists` | boolean | proposed | no | locked scope: file-existence check only, no content analysis |
-| `transcript_word_count` | integer | proposed | yes (null if no transcript) | locked scope: word/character count only, no NLP |
-| `rewatch_flag_rate` | numeric (0-1) | proposed | TBD | derived from `is_rewatch_flagged` in `interactions_curated`; not yet implemented |
+| `user_id` | bigint | yes | no | User identifier. |
+| `feature_date` | date | yes | no | The `p_date` of the events. |
+| `n_events` | integer | yes | no | Deduplicated events that day, at least 1. |
+| `total_watch_seconds` | bigint | yes | no | Sum of `watch_time`, rewatch time included. |
+| `late_night_events` | integer | yes | no | Events with `p_hour` from 2 to 4 inclusive. |
+| `late_night_watch_seconds` | bigint | yes | no | `watch_time` summed over those events. |
+| `late_night_share` | double | yes | yes | `late_night_watch_seconds / total_watch_seconds`, range 0 to 1. NULL when total watch time is 0. |
+| `n_sessions` | integer | yes | no | Sessions that day, at least 1. Gap threshold 900 seconds. |
+| `max_session_seconds` | bigint | yes | no | Longest session, as summed `watch_time`. |
+| `avg_session_seconds` | double | yes | no | Mean session length. |
+| `hate_events` | integer | yes | no | Events with `hate = true`. |
+| `hate_rate` | double | yes | no | `hate_events / n_events`, range 0 to 1. Rare-event rate, not a per-session trend. |
+| `rewatch_events` | integer | yes | no | Events with `watch_time > duration`. |
+| `rewatch_rate` | double | yes | no | `rewatch_events / n_events`, range 0 to 1. |
 
-## Producer / consumer
+## Enforced rules
 
-- **Producer (intended):** the staging → curated transformation step (Person B's track),
-  not yet built.
-- **Consumer (intended):** `risk_scores` table computation, and any downstream
-  dashboard/notebook use described in earlier project planning. No consumer currently reads
-  this table since it does not exist yet.
+Database `CHECK` constraints mirror the ranges above. `scripts/validate.py` (`run_curated`) additionally checks primary key uniqueness, `hate_events <= n_events`, `max_session_seconds >= avg_session_seconds`, that `sum(n_events)` equals the curated event count and the staged event count, and that every `user_id` exists in `users`.
 
-## Constraints (proposed, unverified)
+## Known limitations
 
-- `(user_id, feature_date)` unique.
-- `late_night_share` and `hate_rate` bounded to [0, 1] once implemented.
-- `transcript_word_count` non-negative when not null.
-
-## Explicitly unresolved / TBD
-
-- Late-night window boundaries (hour range) are not fixed. Earlier profiling discussion
-  noted the available raw sample lacked hours 0-1, which bears on how this window should be
-  defined, but that has not been resolved here.
-- Session definition for `avg_session_length` is not fixed.
-- No validation of these fields against real data has occurred — no data exists in this
-  repository to validate against as of Day 1.
-- This contract will need revision once Person A's raw ingestion output and Person B's
-  staging logic exist and the real column set is known.
+- Sessions are split at date boundaries, so a session running past midnight counts as two.
+- `p_hour` is the source's own field and can differ from the UTC+8 hour of `exposed_time` by one hour for about 18% of rows.
+- The sample logs few events per user-day (5.2 on average), so session lengths are short and long-session signals are weak.
+- The transcript feature is not part of this table. It lives on `videos` (`has_transcript`, `transcript_word_count`).
