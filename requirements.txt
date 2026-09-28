@@ -1,4 +1,4 @@
-# Pipeline dependencies. Airflow itself is provided by the Airflow image (Day 4), not installed here.
+# Pipeline dependencies. Airflow itself comes from the apache/airflow base image (see Dockerfile).
 pandas>=2.2
 pyarrow>=15
 psycopg2-binary>=2.9

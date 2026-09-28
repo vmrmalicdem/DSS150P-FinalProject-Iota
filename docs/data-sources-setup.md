@@ -77,3 +77,51 @@ Outputs: `staging/` and `curated/` (Parquet, partitioned by `p_date`), validatio
 `staging/_validation/`, and the warehouse tables described in `docs/erd.md`. Example queries are in
 `sql/queries.sql`. A failed validation gate stops the run with a nonzero exit code and names the check.
 The Airflow DAG (`dags/short_video_risk_dag.py`) calls the same functions, one date partition per run.
+
+## Running the pipeline under Airflow in Docker (Day 4)
+
+Prerequisites: Docker with Compose v2, and the source files in `data_sources/` (see above).
+
+```bash
+cp .env.example .env        # then set the three change_me_* passwords; on Linux set AIRFLOW_UID=$(id -u)
+docker compose up -d --build
+docker compose ps           # wait until airflow-webserver and airflow-scheduler are healthy
+```
+
+`airflow-init` runs once (migrates Airflow's metadata DB, creates the admin user, fixes folder
+permissions) and then exits; that is expected. The UI is at http://localhost:8080 (login from
+`AIRFLOW_ADMIN_USER` / `AIRFLOW_ADMIN_PASSWORD` in `.env`).
+
+Run the DAG `short_video_risk_pipeline`:
+
+```bash
+# one partition
+docker compose exec airflow-scheduler airflow dags unpause short_video_risk_pipeline
+docker compose exec airflow-scheduler airflow dags trigger short_video_risk_pipeline --conf '{"p_date": "20220918"}'
+
+# or unpause it and let catchup replay 2022-09-16 .. 2022-09-22, one run per day (max_active_runs=1)
+```
+
+Check results:
+
+```bash
+docker compose exec airflow-scheduler airflow dags list-runs -d short_video_risk_pipeline
+docker compose exec postgres psql -U pipeline_user -d shortvideo_risk -c "SELECT p_date, count(*) FROM interactions_curated GROUP BY 1 ORDER BY 1;"
+```
+
+Demonstrate rerun safety: trigger the same `p_date` twice; the row counts above do not change.
+Demonstrate failure diagnosis: temporarily rename a column in `raw/interactions/p_date=.../interactions.csv`,
+trigger that date, and open the `validate_raw` task log in the UI: it fails immediately (no retries) and names the check.
+
+Without Airflow, the same stage functions run through the CLI container:
+
+```bash
+docker compose --profile cli run --rm pipeline python scripts/run_pipeline.py --all
+```
+
+Stop with `docker compose down`; add `-v` to also delete the warehouse and Airflow databases.
+
+Notes
+- The DAG reads `POSTGRES_HOST=postgres` from Compose; do not change it to `localhost` inside containers.
+- Only `raw/`, `staging/`, `curated/`, `logs/` and `data_sources/` hold data, and all are gitignored.
+- Database passwords in `.env.example` are placeholders for local development only.
