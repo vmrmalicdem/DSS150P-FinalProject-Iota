@@ -7,7 +7,7 @@ by running the actual pipeline (`scripts/run_pipeline.py --all --skip-load`) end
 Full pipeline run against this file: 7/7 partitions succeeded, 0 validation errors, 1
 pre-existing warning (duplicate category IDs, documented below), ~35 seconds total.
 
----
+--- 
 
 ## 1. `interaction_sampled.csv`
 
