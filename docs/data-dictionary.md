@@ -21,8 +21,8 @@ One row per de-duplicated, tag-collapsed event: `(user_id, pid, exposed_time)`.
 | `user_id` | integer | No | Viewer id. FK → `users.user_id`. | `1` |
 | `pid` | integer | No | Video id. FK → `videos.pid`. | `63980` |
 | `exposed_time` | integer (Unix seconds) | No | When the video was exposed to the user. Part of the event's natural key. | `1663598611` |
-| `p_date` | date | No | Partition date, assigned from `exposed_time` (UTC day), not the raw file's own `p_date` label — see cross-partition ownership rule in the profiling report. | `2022-09-19` |
-| `p_hour` | integer (0–23) | No | Hour of `exposed_time`. | `22` |
+| `p_date` | date | No | Partition date: the source's own `p_date` label, which is the UTC+8 (Beijing) calendar date of `exposed_time`. An event that appears in several raw partitions is kept in the earliest one (3 events in the real data). See the profiling report, section 1.4. | `2022-09-19` |
+| `p_hour` | integer (0–23) | No | Hour of day as given by the source. Equals the UTC+8 hour of `exposed_time` for 81.88% of rows and is one hour later for the rest; not recomputed. See the profiling report, section 1.4. | `22` |
 | `author_fans_count` | integer | No | Follower count of the video's author at exposure time. | `29625` |
 | `watch_time` | integer (seconds) | No | Seconds watched. | `111` |
 | `watch_ratio` | float | No | `watch_time / duration`. Can exceed 1.0 (rewatch); can be `inf`/`NaN` if `duration` is 0, though no zero-duration rows were found in this file. | `0.991` |
@@ -101,23 +101,28 @@ whole dimension's key and attributes are static per user.
 
 ## `dims/categories` (dimension)
 
-820 rows, one per row in `categories_cn_en.csv` (after whitespace-stripping both label
-columns) — **not deduplicated on `category_id`**, because 6 ids carry two different English
-labels in the source and collapsing them would silently discard one label.
+820 rows, one per distinct `category_id` (826 source rows minus 6 duplicates). Six ids carry
+two different English labels in `categories_cn_en.csv`; staging keeps the **first occurrence
+in file order** (a deterministic rule, so reruns always give the same result) and sets
+`en_label_ambiguous = True` on those ids so the conflict stays visible downstream.
 
 | Field | Type | Nullable | Description | Example |
 | --- | --- | --- | --- | --- |
 | `category_level` | integer (1–3) | No | | `1` |
-| `category_id` | integer | No | **Not unique** — 6 ids appear twice (see `en_label_ambiguous`). | `1` |
+| `category_id` | integer | No | Primary key. Unique after staging (the source file has 6 ids that appear twice). | `1` |
 | `category_name_cn` | string | No | Whitespace-stripped. | `舞蹈` |
 | `parent_id` | integer | No | | `1` |
 | `root_id` | integer | No | | `1` |
-| `category_name_en` | string | Yes (4 rows blank) | Whitespace-stripped (source had a leading space on every value). | `dance` |
-| `en_label_ambiguous` | boolean | No | `True` for the 6 `category_id` values that have two conflicting `category_name_en` rows in the source; flags rather than silently resolves the conflict. | `False` |
+| `category_name_en` | string | Yes (4 rows blank) | Whitespace-stripped (the source had a leading space on 786 of 826 values). | `dance` |
+| `en_label_ambiguous` | boolean | No | `True` for the 6 `category_id` values that had two conflicting `category_name_en` rows in the source (ids 233, 239, 338, 350, 354, 368). The kept English label is the first one in file order. | `False` |
 
-**No single-column primary key** — `category_id` alone is not unique in the source data.
-Consumers needing one label per id should filter or pick a convention (e.g. first non-blank
-`category_name_en`) explicitly, rather than relying on the pipeline to have chosen for them.
+**Primary key:** `category_id`.
+
+**Caveat for consumers:** first-occurrence is deterministic but not always *correct*. For two
+of the six ambiguous ids the kept English label is visibly wrong against the Chinese name:
+id 239 (舞蹈教学, "dance teaching") keeps "Ace warrior", and id 354 (仿妆, "imitation makeup")
+keeps "action movies". Rely on `category_name_cn` for these, or treat `en_label_ambiguous`
+rows as unreliable English labels. Four rows also have a blank `category_name_en`.
 
 ---
 
@@ -130,7 +135,7 @@ duplicating the fact row per tag.
 | Field | Type | Nullable | Description | Example |
 | --- | --- | --- | --- | --- |
 | `pid` | integer | No | FK → `videos.pid`. | `1` |
-| `category_id` | integer | No | FK → `categories.category_id` (matches on value; not unique there, see above). | `6` |
+| `category_id` | integer | No | FK → `categories.category_id`. | `6` |
 
 **Primary key:** `(pid, category_id)`.
 
