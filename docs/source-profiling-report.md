@@ -1,18 +1,25 @@
 # Source Profiling Report
 
-Profiled directly against the files uploaded to `data_sources/`:
-`interaction_sampled.csv`, `categories_cn_en.csv`, and `asr_en/*.txt`. All figures below
-were produced by reading these exact files with pandas / the `csv` module and, where noted,
-by running the actual pipeline (`scripts/run_pipeline.py --all --skip-load`) end to end.
-Full pipeline run against this file: 7/7 partitions succeeded, 0 validation errors, 1
-pre-existing warning (duplicate category IDs, documented below), ~35 seconds total.
+Profiled directly against the files in `data_sources/`: `interaction_sampled.csv`,
+`categories_cn_en.csv`, and `asr_en/*.txt`, read exactly as delivered and before any
+transformation. Every figure below is produced by `scripts/profile_sources.py` and can be
+regenerated:
 
---- 
+```bash
+python scripts/profile_sources.py        # writes outputs/profiling/source_profile.{json,md}
+```
+
+The committed output is in `outputs/profiling/`, and `tests/test_profiling.py` fails if a
+figure in this report stops matching it, or stops matching the pipeline's own row counts.
+The full pipeline run on this file (`scripts/run_pipeline.py --all`) succeeded for 7/7
+partitions with 0 validation errors and 1 expected warning (duplicate category IDs, below).
+
+---
 
 ## 1. `interaction_sampled.csv`
 
-**Provider / origin:** short-video interaction sample (Kuaishou-style schema), CSV, single
-file. Read with `encoding="utf-8-sig"` — the file starts with a UTF-8 BOM.
+**Provider / origin:** Tsinghua FIB Lab `ShortVideo_dataset` (link and access notes in
+`docs/data-sources-setup.md`), CSV, single file. Read with `encoding="utf-8-sig"` — the file starts with a UTF-8 BOM.
 
 | Metric | Value |
 | --- | --- |
@@ -36,7 +43,7 @@ Every column read as `dtype=str` at the source (no column contains an empty-stri
 | `category_level` | 3 | `{1: 351925, 2: 258156, 3: 183972}` |
 | `parent_id` | 110 | |
 | `root_id` | 38 | |
-| `exposed_time` | 101,847 | Unix seconds, range 1663263896–1663861929 (spans p_date range exactly) |
+| `exposed_time` | 101,847 | Unix seconds, range 1663263896–1663861929, which is 2022-09-16 01:44:56 to 2022-09-22 23:52:09 in UTC+8 |
 | `author_fans_count` | 75,448 | range 1–215,859,160 |
 | `watch_time` | 587 | seconds, range 0–922 |
 | `duration` | 14,519 | seconds, range 3.958–1734.92 |
@@ -50,7 +57,7 @@ Every column read as `dtype=str` at the source (no column contains an empty-stri
 | `mod_price` | 271 | range 399–17,799 |
 | `fre_city` | 365 | Chinese city names |
 | `fre_community_type` | 4 | `{乡村: 292848, unknown: 256974, 城区: 155864, 镇区: 88367}` — 32.4% are the literal string `"unknown"`, not a missing value |
-| `fre_city_level` | 7 | includes `unknown` (7 rows only) alongside 6 tier labels |
+| `fre_city_level` | 7 | six tier labels plus `unknown` (520 rows, 0.07%) |
 
 ### 1.2 Duplicates
 
@@ -65,19 +72,30 @@ Every column read as `dtype=str` at the source (no column contains an empty-stri
 The file is tag-exploded: each row is one `(user_id, pid, exposed_time, tag_name)`
 combination, not one event. Grouping by `(user_id, pid, exposed_time)`:
 
-- **129,483 unique events** across the whole file, vs. **794,053 raw rows** — each event
-  appears a median of ~2–3 times, with a long tail up to 675 rows for a single event (a
-  heavily multi-tagged video). This is why the curated `interactions_curated` table
+- **129,483 unique events** across the whole file, vs. **794,053 raw rows**. A typical event
+  spans several rows: the median is 6 and the mean 6.13, only 6,516 events (5%) have a single
+  row, and one event has 675 rows (a heavily multi-tagged video). This is why the curated `interactions_curated` table
   (129,483 rows) is much smaller than the raw row count, and why the pipeline builds a
   separate `video_categories` bridge table instead of carrying `tag_name`/`category_id`
   inline on the event.
 
-### 1.4 Cross-partition events
+### 1.4 Time fields and cross-partition events
 
-A small number of events have `exposed_time` values that place them one UTC day before
-their stated `p_date`. Staging assigns each event to the partition implied by
-`exposed_time`, not the file's own `p_date` label, and logs how many rows this affects per
-partition (`events_owned_by_earlier_partition`).
+Measured by `scripts/profile_sources.py` (not assumed):
+
+- **`p_date` is the calendar date in UTC+8 (Beijing time) of `exposed_time`.** It matches the
+  UTC+8 date for all but 3 of 794,053 rows, but the UTC date for only 713,181 (89.82%).
+- **`p_hour` is not simply the exposure hour.** It equals the UTC+8 hour of `exposed_time` for
+  81.88% of rows and is exactly one hour later for the other 18.12% (exposures late in the hour).
+  The cause is not known; testing "hour in which viewing ended" explained only 83% of rows.
+  This is why no row has `p_hour` 0 or 1 although the earliest exposure is 01:44:56 UTC+8. The
+  pipeline uses `p_hour` as given, so the late-night window (hours 2 to 4) is fuzzy by up to an hour.
+- **3 events appear in two `p_date` partitions** (same user, video and exposure time). The 3 rows
+  whose `p_date` disagrees with the UTC+8 date are exactly the earlier-partition copies of these
+  events: in each case the exposure falls on the later date. Staging keeps an event in the earliest
+  partition that contains it (`events_owned_by_earlier_partition`, 3 in total on this file), so those
+  3 events, out of 129,483, are placed one day before their exposure date. Staging uses the file's
+  own `p_date` label; it does not derive the date from `exposed_time`.
 
 ### 1.5 Data quality issues found
 
@@ -85,10 +103,10 @@ partition (`events_owned_by_earlier_partition`).
 | --- | --- | --- |
 | 13.16% exact duplicate rows | whole file | Dropped in staging; count logged per partition |
 | Tag fan-out (rows ≠ events) | whole file | Collapsed to one row per event in `interactions_curated`; tags become `video_categories` rows |
-| `watch_time > duration` ("rewatch") | up to ~28% of events in some partitions (e.g. 3,465/12,505 on 09-22) | Retained, not dropped or capped; flagged via `is_rewatch_flagged`, ratio kept in `watch_ratio` |
+| `watch_time > duration` ("rewatch") | 27.65% of raw rows (219,522); 27.7% to 29.7% of events per partition in the staging statistics | Retained, not dropped or capped; flagged via `is_rewatch_flagged`, ratio kept in `watch_ratio` |
 | `fre_community_type` / `fre_city_level` literal `"unknown"` | 32.4% / 0.1% of rows | Preserved as-is (not treated as null); validated as an accepted value, not a missing value |
 | Embedded newlines inside `title` | 87 rows | Requires a real CSV parser; naive line-splitting would corrupt these rows |
-| No rows for `p_hour` 0–1 | whole file | Confirmed absent, not a bug in ingestion |
+| No rows for `p_hour` 0–1; `p_hour` up to one hour later than the exposure hour for 18.12% of rows | whole file | Not an ingestion bug: the earliest exposure is 01:44:56 UTC+8 and its `p_hour` is 2. `p_hour` is used as given; see section 1.4 |
 
 ---
 
@@ -103,13 +121,17 @@ partition (`events_owned_by_earlier_partition`).
 - **Referential integrity: clean.** All 631 distinct `category_id` values used in
   `interaction_sampled.csv` are present in this file — 0 orphaned category references.
 - **Duplicate `category_id` values: 6** (`233, 239, 338, 350, 354, 368`) — each appears twice
-  with a different `category_name_en` label. The pipeline keeps both rows in staging, flags
-  each affected id with `en_label_ambiguous = True` in the curated `categories` dimension,
-  and surfaces the conflict as a validation **warning** (not a failure) per raw partition.
+  with a different `category_name_en` label. Staging keeps the first occurrence in file
+  order, flags each affected id with `en_label_ambiguous = True` in the curated `categories`
+  dimension (820 rows, `category_id` unique), and surfaces the conflict as a validation
+  **warning** (not a failure) per raw partition. First-occurrence is deterministic but not
+  always right: for id 239 (舞蹈教学, "dance teaching") it keeps "Ace warrior", and for id 354
+  (仿妆, "imitation makeup") it keeps "action movies".
 - **4 rows have a blank `category_name_en`** after stripping whitespace.
-- **Every `category_name_en` value has a leading space** in the raw file (e.g. `" beauty"`,
-  `" folk dance"`). Confirmed formatting artifact of the source file, not a parsing bug.
-  Staging strips both `category_name_cn` and `category_name_en`.
+- **786 of 826 `category_name_en` values have a leading space** in the raw file (e.g. `" beauty"`,
+  `" folk dance"`); the other 40 do not (4 are blank and 36 are labels such as `tattoos` and
+  `brawl`). A formatting artifact of the source file, not a parsing bug. Staging strips both
+  `category_name_cn` and `category_name_en`.
 - `category_level` distribution: `{1: 36, 2: 307, 3: 483}` — a 3-level taxonomy.
 
 ---
@@ -150,5 +172,7 @@ partition (`events_owned_by_earlier_partition`).
   or analysis with statistical confidence** — it exists to demonstrate the CSV/JSON/text
   multi-format ingestion requirement, not to drive real content-based insights.
 - **The 6 duplicate category IDs with conflicting English labels** are a genuine upstream
-  data-quality defect in `categories_cn_en.csv`, not an ingestion bug; documented and
-  flagged rather than silently resolved by picking one label.
+  data-quality defect in `categories_cn_en.csv`, not an ingestion bug; resolved
+  deterministically (first occurrence kept), flagged with `en_label_ambiguous`, and reported
+  as a validation warning. Two of the six kept labels are visibly wrong (ids 239 and 354), so
+  English category labels for flagged ids should not be trusted; `category_name_cn` is reliable.
