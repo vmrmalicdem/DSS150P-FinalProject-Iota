@@ -30,7 +30,7 @@ static file would not demonstrate or support that operating model.
 ## Team Members
 - QUERIJERO, ELIJAH BRADLEY
 - AGUAVIVA, YUVAL MA. EZEKIEL
-- MALICDEM, VINCE MARTIN
+- MALICDEM, VINCE MARTIN  
 
 
 ## 2. Data sources
@@ -100,6 +100,8 @@ Docker Compose  (docker-compose.yml)  runs Postgres, Airflow metadata DB, webser
 │   └── bench_utils.py        timing helpers shared by the two benchmark scripts
 ├── sql/schema.sql, sql/queries.sql                 DDL and representative queries
 ├── tests/                                          pytest suite (see section 12)
+├── pytest.ini, requirements-dev.txt                test configuration and dev dependencies
+├── .github/workflows/tests.yml                     CI: runs the suite against a PostgreSQL service on every push
 ├── docs/
 │   ├── data-sources-setup.md         source provenance & how to place data_sources/
 │   ├── source-profiling-report.md    full profiling of the actual source files
@@ -253,6 +255,7 @@ well-built Parquet file) is in [`docs/format-comparison-and-partitioning.md`](do
 ## 12. Automated tests
 
 ```bash
+pip install -r requirements-dev.txt
 python -m pytest                      # everything; PostgreSQL tests skip if no database is reachable
 docker compose up -d postgres         # start the database, then re-run to include the PostgreSQL tests
 python -m pytest tests/test_validate.py -k raw     # a subset
@@ -270,8 +273,13 @@ that is dropped afterwards). It runs in about 8 seconds and needs no source data
 | `test_stage.py` | exact-duplicate removal, tag fan-out collapse, cross-partition ownership, typing, rewatch kept and flagged, `unknown` preserved, category and transcript staging |
 | `test_curate.py` | session boundaries (including overlapping views), late-night window, rates, null `late_night_share`, dimensions |
 | `test_validate.py` | every validation gate: each check type passes on clean data and fails (or warns) on the matching defect |
+| `test_benchmarks.py` | benchmark correctness: format fidelity classification, row-group pruning, and that every partition strategy returns identical rows |
+| `test_erd.py` | the ER diagrams (PlantUML and Mermaid) match `sql/schema.sql`: tables, columns, types, NOT NULL, keys, defaults, CHECKs, relationships |
 | `test_pipeline_e2e.py` | full run without PostgreSQL, record tracing across layers, identical output on rerun |
 | `test_load_postgres.py` | table creation, reload without duplicates, per-date replace, dimension updates, PK/FK enforcement, rollback on failure |
+
+GitHub Actions (`.github/workflows/tests.yml`) runs the same suite on every push against a
+PostgreSQL service container.
 
 ## 13. Rerun safety
 
