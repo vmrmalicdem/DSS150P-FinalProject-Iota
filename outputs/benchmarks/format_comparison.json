@@ -1,0 +1,215 @@
+{
+  "generated_at": "2026-10-03T02:28:25.837237+00:00",
+  "repeats": 5,
+  "machine": {
+    "platform": "Linux-6.18.44-fc-v64-x86_64-with-glibc2.39",
+    "python": "3.12.3",
+    "pandas": "2.1.4",
+    "pyarrow": "19.0.0",
+    "cpu_count": 1
+  },
+  "datasets": [
+    {
+      "dataset": "curated",
+      "rows": 129483,
+      "columns": 18,
+      "subset_columns": [
+        "user_id",
+        "p_date",
+        "watch_time"
+      ],
+      "formats": [
+        {
+          "format": "CSV",
+          "size_bytes": 17908631,
+          "write_seconds": 0.5002177020000005,
+          "read_all_seconds": 0.14194854599999474,
+          "read_columns_seconds": 0.09097988400000645,
+          "columns_exact": 16,
+          "columns_total": 18,
+          "dtype_changed": {
+            "p_date": "datetime64[ns] -> object"
+          },
+          "value_changed": {
+            "watch_ratio": 7.105427357601002e-15
+          },
+          "missing": []
+        },
+        {
+          "format": "CSV (gzip)",
+          "size_bytes": 3358806,
+          "write_seconds": 1.8441636319999901,
+          "read_all_seconds": 0.194704497999993,
+          "read_columns_seconds": 0.13675444500000822,
+          "columns_exact": 16,
+          "columns_total": 18,
+          "dtype_changed": {
+            "p_date": "datetime64[ns] -> object"
+          },
+          "value_changed": {
+            "watch_ratio": 7.105427357601002e-15
+          },
+          "missing": []
+        },
+        {
+          "format": "JSON (array)",
+          "size_bytes": 45471792,
+          "write_seconds": 0.27690055299999017,
+          "read_all_seconds": 0.7257047740000075,
+          "read_columns_seconds": 0.7375644660000091,
+          "columns_exact": 16,
+          "columns_total": 18,
+          "dtype_changed": {
+            "p_date": "datetime64[ns] -> int64"
+          },
+          "value_changed": {
+            "watch_ratio": 5.000000413701855e-11
+          },
+          "missing": []
+        },
+        {
+          "format": "JSON Lines",
+          "size_bytes": 45471791,
+          "write_seconds": 0.5068904970000006,
+          "read_all_seconds": 0.8371138339999931,
+          "read_columns_seconds": 0.8328836689999974,
+          "columns_exact": 16,
+          "columns_total": 18,
+          "dtype_changed": {
+            "p_date": "datetime64[ns] -> int64"
+          },
+          "value_changed": {
+            "watch_ratio": 5.000000413701855e-11
+          },
+          "missing": []
+        },
+        {
+          "format": "Parquet (snappy)",
+          "size_bytes": 3158455,
+          "write_seconds": 0.05989041799999484,
+          "read_all_seconds": 0.022896356999993372,
+          "read_columns_seconds": 0.0033716720000001033,
+          "columns_exact": 18,
+          "columns_total": 18,
+          "dtype_changed": {},
+          "value_changed": {},
+          "missing": []
+        },
+        {
+          "format": "Parquet (zstd)",
+          "size_bytes": 2656371,
+          "write_seconds": 0.06453039199999466,
+          "read_all_seconds": 0.021425598999996964,
+          "read_columns_seconds": 0.0035069900000053167,
+          "columns_exact": 18,
+          "columns_total": 18,
+          "dtype_changed": {},
+          "value_changed": {},
+          "missing": []
+        }
+      ]
+    },
+    {
+      "dataset": "staged",
+      "rows": 129483,
+      "columns": 28,
+      "subset_columns": [
+        "user_id",
+        "p_date",
+        "watch_time"
+      ],
+      "formats": [
+        {
+          "format": "CSV",
+          "size_bytes": 33687377,
+          "write_seconds": 0.8812738860000024,
+          "read_all_seconds": 0.35927084300000445,
+          "read_columns_seconds": 0.2119675830000034,
+          "columns_exact": 26,
+          "columns_total": 28,
+          "dtype_changed": {
+            "p_date": "datetime64[ns] -> object"
+          },
+          "value_changed": {
+            "watch_ratio": 7.105427357601002e-15
+          },
+          "missing": []
+        },
+        {
+          "format": "CSV (gzip)",
+          "size_bytes": 8272655,
+          "write_seconds": 2.496601064999993,
+          "read_all_seconds": 0.46481022599999733,
+          "read_columns_seconds": 0.32813198200000215,
+          "columns_exact": 26,
+          "columns_total": 28,
+          "dtype_changed": {
+            "p_date": "datetime64[ns] -> object"
+          },
+          "value_changed": {
+            "watch_ratio": 7.105427357601002e-15
+          },
+          "missing": []
+        },
+        {
+          "format": "JSON (array)",
+          "size_bytes": 78114943,
+          "write_seconds": 0.5916488489999949,
+          "read_all_seconds": 1.604747417999988,
+          "read_columns_seconds": 1.5793234119999795,
+          "columns_exact": 25,
+          "columns_total": 28,
+          "dtype_changed": {
+            "p_date": "datetime64[ns] -> int64"
+          },
+          "value_changed": {
+            "duration": 1.1368683772161603e-13,
+            "watch_ratio": 5.000000413701855e-11
+          },
+          "missing": []
+        },
+        {
+          "format": "JSON Lines",
+          "size_bytes": 78114942,
+          "write_seconds": 1.1553747819999955,
+          "read_all_seconds": 1.893569790000015,
+          "read_columns_seconds": 1.8773069190000058,
+          "columns_exact": 25,
+          "columns_total": 28,
+          "dtype_changed": {
+            "p_date": "datetime64[ns] -> int64"
+          },
+          "value_changed": {
+            "duration": 1.1368683772161603e-13,
+            "watch_ratio": 5.000000413701855e-11
+          },
+          "missing": []
+        },
+        {
+          "format": "Parquet (snappy)",
+          "size_bytes": 6067106,
+          "write_seconds": 0.16113760799999,
+          "read_all_seconds": 0.07011233099999004,
+          "read_columns_seconds": 0.0037773180000044704,
+          "columns_exact": 28,
+          "columns_total": 28,
+          "dtype_changed": {},
+          "value_changed": {},
+          "missing": []
+        },
+        {
+          "format": "Parquet (zstd)",
+          "size_bytes": 5016562,
+          "write_seconds": 0.16613415899999495,
+          "read_all_seconds": 0.07083637899998507,
+          "read_columns_seconds": 0.003923189999994747,
+          "columns_exact": 28,
+          "columns_total": 28,
+          "dtype_changed": {},
+          "value_changed": {},
+          "missing": []
+        }
+      ]
+    }
+  ]
+}

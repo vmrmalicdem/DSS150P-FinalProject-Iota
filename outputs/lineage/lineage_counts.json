@@ -1,0 +1,66 @@
+{
+  "generated_at": "2026-10-03T08:47:32.817154+00:00",
+  "partitions": 7,
+  "source": {
+    "interaction_rows_read": 794053,
+    "malformed_rows_skipped": 0,
+    "category_rows": 826,
+    "transcript_files": 10
+  },
+  "raw": {
+    "interaction_rows": 794053
+  },
+  "staging": {
+    "exact_duplicate_rows_dropped": 104519,
+    "rows_after_dedup": 689534,
+    "duplicate_share": 0.13162723395037862,
+    "events_in_partitions": 129486,
+    "events_owned_by_earlier_partition": 3,
+    "events": 129483,
+    "video_category_pairs": 147072,
+    "rewatch_flagged_events": 37666,
+    "categories": 820,
+    "transcripts": 10
+  },
+  "curated": {
+    "interactions_curated": 129483,
+    "daily_user_features": 25109,
+    "users": 6654,
+    "videos": 31496,
+    "categories": 820,
+    "video_categories": 67311
+  },
+  "validation": {
+    "raw": {
+      "partitions": 7,
+      "checks_per_partition": 19,
+      "checks_total": 133,
+      "warnings": 7,
+      "errors": 0
+    },
+    "staged": {
+      "partitions": 7,
+      "checks_per_partition": 10,
+      "checks_total": 70,
+      "warnings": 0,
+      "errors": 0
+    },
+    "curated": {
+      "partitions": 7,
+      "checks_per_partition": 11,
+      "checks_total": 77,
+      "warnings": 0,
+      "errors": 0
+    }
+  },
+  "postgres": {
+    "categories": 820,
+    "users": 6654,
+    "videos": 31496,
+    "video_categories": 67311,
+    "interactions_curated": 129483,
+    "daily_user_features": 25109,
+    "risk_scores": 0
+  },
+  "problems": []
+}

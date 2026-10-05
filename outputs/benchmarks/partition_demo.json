@@ -1,0 +1,122 @@
+{
+  "generated_at": "2026-10-03T02:26:39.304050+00:00",
+  "p_date": "20220919",
+  "repeats": 15,
+  "machine": {
+    "platform": "Linux-6.18.44-fc-v64-x86_64-with-glibc2.39",
+    "python": "3.12.3",
+    "pandas": "2.1.4",
+    "pyarrow": "19.0.0",
+    "cpu_count": 1
+  },
+  "identical_results": true,
+  "partition_stats": [
+    {
+      "p_date": "20220916",
+      "rows": 22533,
+      "bytes": 597826,
+      "share_of_rows": 0.17402284469775955
+    },
+    {
+      "p_date": "20220917",
+      "rows": 23439,
+      "bytes": 624969,
+      "share_of_rows": 0.18101990222654712
+    },
+    {
+      "p_date": "20220918",
+      "rows": 22130,
+      "bytes": 598127,
+      "share_of_rows": 0.17091046701111343
+    },
+    {
+      "p_date": "20220919",
+      "rows": 17268,
+      "bytes": 472406,
+      "share_of_rows": 0.13336113621093115
+    },
+    {
+      "p_date": "20220920",
+      "rows": 17739,
+      "bytes": 479233,
+      "share_of_rows": 0.1369986793633141
+    },
+    {
+      "p_date": "20220921",
+      "rows": 13869,
+      "bytes": 389073,
+      "share_of_rows": 0.10711058594564538
+    },
+    {
+      "p_date": "20220922",
+      "rows": 12505,
+      "bytes": 356828,
+      "share_of_rows": 0.09657638454468927
+    }
+  ],
+  "skew_ratio": 1.8743702518992402,
+  "curated_parquet": [
+    {
+      "strategy": "Partition read",
+      "description": "read only this day's file",
+      "seconds": 0.004861572999999453,
+      "rows_returned": 17268,
+      "files_read": 1,
+      "rows_read": 17268,
+      "bytes_read": 463797,
+      "speedup_vs_full_scan": 7.729109076425111
+    },
+    {
+      "strategy": "Full scan + filter",
+      "description": "read every day's file, then filter",
+      "seconds": 0.03757562799999903,
+      "rows_returned": 17268,
+      "files_read": 7,
+      "rows_read": 129483,
+      "bytes_read": 3458195,
+      "speedup_vs_full_scan": 1.0
+    },
+    {
+      "strategy": "Single file, default row groups",
+      "description": "one Parquet file, pushed-down filter",
+      "seconds": 0.01618987599999855,
+      "rows_returned": 17268,
+      "files_read": 1,
+      "rows_read": 129483,
+      "bytes_read": 3149809,
+      "speedup_vs_full_scan": 2.3209336501405198
+    },
+    {
+      "strategy": "Single file, one row group per day",
+      "description": "one Parquet file, pushed-down filter",
+      "seconds": 0.005291214999999738,
+      "rows_returned": 17268,
+      "files_read": 1,
+      "rows_read": 17268,
+      "bytes_read": 463797,
+      "speedup_vs_full_scan": 7.101512223563187
+    }
+  ],
+  "raw_csv": [
+    {
+      "strategy": "Raw CSV: one partition",
+      "description": "read only this day's CSV",
+      "seconds": 0.2615680919999974,
+      "rows_returned": 106439,
+      "files_read": 1,
+      "rows_read": 106439,
+      "bytes_read": 21534832,
+      "speedup_vs_full_scan": 8.498660065922808
+    },
+    {
+      "strategy": "Raw CSV: read all, filter",
+      "description": "read every day's CSV, then filter",
+      "seconds": 2.222978298000001,
+      "rows_returned": 106439,
+      "files_read": 7,
+      "rows_read": 794053,
+      "bytes_read": 160715707,
+      "speedup_vs_full_scan": 1.0
+    }
+  ]
+}

@@ -1,0 +1,605 @@
+{
+  "generated_at": "2026-10-03T13:53:00.636788+00:00",
+  "source_dir": "/tmp/real/data_sources",
+  "interactions": {
+    "status": "ok",
+    "path": "/tmp/real/data_sources/interaction_sampled.csv",
+    "file_bytes": 159920078,
+    "rows": 794053,
+    "columns": 28,
+    "column_names": [
+      "user_id",
+      "pid",
+      "author_id",
+      "category_id",
+      "category_level",
+      "parent_id",
+      "root_id",
+      "exposed_time",
+      "author_fans_count",
+      "watch_time",
+      "duration",
+      "cvm_like",
+      "click",
+      "comment",
+      "follow",
+      "collect",
+      "forward",
+      "hate",
+      "tag_name",
+      "title",
+      "p_hour",
+      "p_date",
+      "gender",
+      "age",
+      "mod_price",
+      "fre_city",
+      "fre_community_type",
+      "fre_city_level"
+    ],
+    "schema": {
+      "matches_expected": true,
+      "missing_columns": [],
+      "unexpected_columns": []
+    },
+    "exact_duplicate_rows": 104519,
+    "exact_duplicate_share": 0.13162723395037862,
+    "partitions": {
+      "20220916": 139102,
+      "20220917": 142107,
+      "20220918": 132215,
+      "20220919": 106439,
+      "20220920": 109959,
+      "20220921": 85097,
+      "20220922": 79134
+    },
+    "p_date_min": "20220916",
+    "p_date_max": "20220922",
+    "p_hour_present": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23
+    ],
+    "p_hour_absent": [
+      0,
+      1
+    ],
+    "rows_with_newline_in_title": 87,
+    "rewatch_rows": 219522,
+    "rewatch_share": 0.27645761680895353,
+    "columns_profile": {
+      "user_id": {
+        "distinct": 6654,
+        "missing": 0,
+        "missing_share": 0.0,
+        "unknown": 0,
+        "non_numeric": 0,
+        "summary": {
+          "min": 1.0,
+          "max": 9999.0,
+          "mean": 4849.020005,
+          "median": 4806.0,
+          "p90": 8955.0,
+          "p99": 9851.0,
+          "std": 2928.928848
+        }
+      },
+      "pid": {
+        "distinct": 31496,
+        "missing": 0,
+        "missing_share": 0.0,
+        "unknown": 0,
+        "non_numeric": 0,
+        "summary": {
+          "min": 1.0,
+          "max": 153523.0,
+          "mean": 46712.302164,
+          "median": 38355.0,
+          "p90": 99520.0,
+          "p99": 141500.0,
+          "std": 36456.600799
+        }
+      },
+      "author_id": {
+        "distinct": 23242,
+        "missing": 0,
+        "missing_share": 0.0,
+        "unknown": 0,
+        "non_numeric": 0,
+        "summary": {
+          "min": 3.0,
+          "max": 3015380385.0,
+          "mean": 1748560222.691492,
+          "median": 1966647634.0,
+          "p90": 2880180145.0,
+          "p99": 2987499856.0,
+          "std": 944019447.48209
+        }
+      },
+      "category_id": {
+        "distinct": 631,
+        "missing": 0,
+        "missing_share": 0.0,
+        "unknown": 0,
+        "non_numeric": 0,
+        "summary": {
+          "min": 1.0,
+          "max": 2357.0,
+          "mean": 445.132219,
+          "median": 136.0,
+          "p90": 1374.0,
+          "p99": 2322.0,
+          "std": 601.296304
+        }
+      },
+      "category_level": {
+        "distinct": 3,
+        "missing": 0,
+        "missing_share": 0.0,
+        "unknown": 0,
+        "non_numeric": 0,
+        "summary": {
+          "min": 1.0,
+          "max": 3.0,
+          "mean": 1.788486,
+          "median": 2.0,
+          "p90": 3.0,
+          "p99": 3.0,
+          "std": 0.793821
+        },
+        "values": {
+          "1": 351925,
+          "2": 258156,
+          "3": 183972
+        }
+      },
+      "parent_id": {
+        "distinct": 110,
+        "missing": 0,
+        "missing_share": 0.0,
+        "unknown": 0,
+        "non_numeric": 0,
+        "summary": {
+          "min": 1.0,
+          "max": 593.0,
+          "mean": 75.045943,
+          "median": 26.0,
+          "p90": 288.0,
+          "p99": 329.0,
+          "std": 104.729123
+        }
+      },
+      "root_id": {
+        "distinct": 38,
+        "missing": 0,
+        "missing_share": 0.0,
+        "unknown": 0,
+        "non_numeric": 0,
+        "summary": {
+          "min": 1.0,
+          "max": 541.0,
+          "mean": 22.843567,
+          "median": 20.0,
+          "p90": 39.0,
+          "p99": 39.0,
+          "std": 14.577515
+        }
+      },
+      "exposed_time": {
+        "distinct": 101847,
+        "missing": 0,
+        "missing_share": 0.0,
+        "unknown": 0,
+        "non_numeric": 0,
+        "summary": {
+          "min": 1663263896.0,
+          "max": 1663861929.0,
+          "mean": 1663538281.18888,
+          "median": 1663507324.0,
+          "p90": 1663774979.0,
+          "p99": 1663854927.0,
+          "std": 168785.120179
+        }
+      },
+      "author_fans_count": {
+        "distinct": 75448,
+        "missing": 0,
+        "missing_share": 0.0,
+        "unknown": 0,
+        "non_numeric": 0,
+        "summary": {
+          "min": 1.0,
+          "max": 215859160.0,
+          "mean": 638992.058108,
+          "median": 153378.0,
+          "p90": 1612348.0,
+          "p99": 7081568.0,
+          "std": 1644511.604661
+        }
+      },
+      "watch_time": {
+        "distinct": 587,
+        "missing": 0,
+        "missing_share": 0.0,
+        "unknown": 0,
+        "non_numeric": 0,
+        "summary": {
+          "min": 0.0,
+          "max": 922.0,
+          "mean": 40.825255,
+          "median": 13.0,
+          "p90": 122.0,
+          "p99": 307.0,
+          "std": 65.538147
+        }
+      },
+      "duration": {
+        "distinct": 14519,
+        "missing": 0,
+        "missing_share": 0.0,
+        "unknown": 0,
+        "non_numeric": 0,
+        "summary": {
+          "min": 3.958,
+          "max": 1734.92,
+          "mean": 121.252918,
+          "median": 83.72,
+          "p90": 292.633,
+          "p99": 499.833,
+          "std": 121.657039
+        }
+      },
+      "cvm_like": {
+        "distinct": 2,
+        "missing": 0,
+        "missing_share": 0.0,
+        "unknown": 0,
+        "values": {
+          "False": 777399,
+          "True": 16654
+        }
+      },
+      "click": {
+        "distinct": 2,
+        "missing": 0,
+        "missing_share": 0.0,
+        "unknown": 0,
+        "values": {
+          "True": 483977,
+          "False": 310076
+        }
+      },
+      "comment": {
+        "distinct": 2,
+        "missing": 0,
+        "missing_share": 0.0,
+        "unknown": 0,
+        "values": {
+          "False": 792431,
+          "True": 1622
+        }
+      },
+      "follow": {
+        "distinct": 2,
+        "missing": 0,
+        "missing_share": 0.0,
+        "unknown": 0,
+        "values": {
+          "False": 790596,
+          "True": 3457
+        }
+      },
+      "collect": {
+        "distinct": 2,
+        "missing": 0,
+        "missing_share": 0.0,
+        "unknown": 0,
+        "values": {
+          "False": 789579,
+          "True": 4474
+        }
+      },
+      "forward": {
+        "distinct": 2,
+        "missing": 0,
+        "missing_share": 0.0,
+        "unknown": 0,
+        "values": {
+          "False": 792348,
+          "True": 1705
+        }
+      },
+      "hate": {
+        "distinct": 2,
+        "missing": 0,
+        "missing_share": 0.0,
+        "unknown": 0,
+        "values": {
+          "False": 793622,
+          "True": 431
+        }
+      },
+      "tag_name": {
+        "distinct": 26355,
+        "missing": 0,
+        "missing_share": 0.0,
+        "unknown": 0
+      },
+      "title": {
+        "distinct": 30154,
+        "missing": 0,
+        "missing_share": 0.0,
+        "unknown": 0
+      },
+      "p_hour": {
+        "distinct": 22,
+        "missing": 0,
+        "missing_share": 0.0,
+        "unknown": 0,
+        "non_numeric": 0,
+        "summary": {
+          "min": 2.0,
+          "max": 23.0,
+          "mean": 15.203775,
+          "median": 16.0,
+          "p90": 22.0,
+          "p99": 23.0,
+          "std": 5.327736
+        }
+      },
+      "p_date": {
+        "distinct": 7,
+        "missing": 0,
+        "missing_share": 0.0,
+        "unknown": 0
+      },
+      "gender": {
+        "distinct": 2,
+        "missing": 0,
+        "missing_share": 0.0,
+        "unknown": 0,
+        "values": {
+          "M": 497010,
+          "F": 297043
+        }
+      },
+      "age": {
+        "distinct": 60,
+        "missing": 0,
+        "missing_share": 0.0,
+        "unknown": 0,
+        "non_numeric": 0,
+        "summary": {
+          "min": 20.0,
+          "max": 79.0,
+          "mean": 44.552094,
+          "median": 40.0,
+          "p90": 71.0,
+          "p99": 79.0,
+          "std": 17.448605
+        }
+      },
+      "mod_price": {
+        "distinct": 271,
+        "missing": 0,
+        "missing_share": 0.0,
+        "unknown": 0,
+        "non_numeric": 0,
+        "summary": {
+          "min": 399.0,
+          "max": 17799.0,
+          "mean": 2069.464222,
+          "median": 1599.0,
+          "p90": 3599.0,
+          "p99": 8499.0,
+          "std": 1627.618929
+        }
+      },
+      "fre_city": {
+        "distinct": 365,
+        "missing": 0,
+        "missing_share": 0.0,
+        "unknown": 0
+      },
+      "fre_community_type": {
+        "distinct": 4,
+        "missing": 0,
+        "missing_share": 0.0,
+        "unknown": 256974,
+        "values": {
+          "乡村": 292848,
+          "unknown": 256974,
+          "城区": 155864,
+          "镇区": 88367
+        }
+      },
+      "fre_city_level": {
+        "distinct": 7,
+        "missing": 0,
+        "missing_share": 0.0,
+        "unknown": 520,
+        "values": {
+          "四线城市": 191926,
+          "三线城市": 185246,
+          "五线城市": 183163,
+          "二线城市": 122023,
+          "新一线城市": 79804,
+          "一线城市": 31371,
+          "unknown": 520
+        }
+      }
+    },
+    "events": {
+      "unique_events": 129483,
+      "rows_per_event": {
+        "min": 1,
+        "median": 6.0,
+        "mean": 6.1325,
+        "max": 675,
+        "distribution": {
+          "1": 6516,
+          "2": 15096,
+          "3": 30556,
+          "4": 11289,
+          "5+": 66026
+        }
+      },
+      "events_in_more_than_one_partition": 3
+    },
+    "time_consistency": {
+      "rows_compared": 794053,
+      "exposed_time_utc_min": "2022-09-15T17:44:56",
+      "exposed_time_utc_max": "2022-09-22T15:52:09",
+      "p_date_equals_utc_date": 713181,
+      "p_date_equals_utc_date_share": 0.89815289407634,
+      "p_date_equals_utc_plus_8_date": 794050,
+      "p_date_equals_utc_plus_8_date_share": 0.9999962219146581,
+      "p_hour_equals_utc_hour_share": 1.259361780636809e-06,
+      "p_hour_equals_utc_plus_8_hour_share": 0.8188156206197823
+    },
+    "category_ids_used": 631,
+    "category_ids_not_in_lookup": 0
+  },
+  "categories": {
+    "status": "ok",
+    "path": "/tmp/real/data_sources/categories_cn_en.csv",
+    "file_bytes": 31506,
+    "rows": 826,
+    "columns": 6,
+    "column_names": [
+      "category_level",
+      "category_id",
+      "category_name_cn",
+      "parent_id",
+      "root_id",
+      "category_name_en"
+    ],
+    "schema": {
+      "matches_expected": true
+    },
+    "distinct_category_ids": 820,
+    "duplicate_category_ids": [
+      233,
+      239,
+      338,
+      350,
+      354,
+      368
+    ],
+    "rows_with_duplicate_id": 12,
+    "blank_english_labels": 4,
+    "english_labels_with_leading_space": 786,
+    "level_distribution": {
+      "1": 36,
+      "2": 307,
+      "3": 483
+    },
+    "missing_by_column": {
+      "category_level": 0,
+      "category_id": 0,
+      "category_name_cn": 0,
+      "parent_id": 0,
+      "root_id": 0,
+      "category_name_en": 4
+    }
+  },
+  "transcripts": {
+    "status": "ok",
+    "path": "/tmp/real/data_sources/asr_en",
+    "files": 10,
+    "bytes_min": 102,
+    "bytes_max": 578,
+    "words_min": 17,
+    "words_max": 117,
+    "undecodable_files": 0,
+    "empty_files": 0,
+    "non_numeric_names": [],
+    "matching_a_video_id": 9,
+    "not_matching_any_video_id": [
+      "7"
+    ],
+    "distinct_videos_in_interactions": 31496,
+    "video_coverage": 0.000285750571501143
+  },
+  "issues": [
+    {
+      "issue": "exact duplicate rows",
+      "count": 104519,
+      "share": 0.13162723395037862
+    },
+    {
+      "issue": "rows beyond one per event (tag fan-out and duplicates)",
+      "count": 664570,
+      "share": 0.8369340585578041
+    },
+    {
+      "issue": "events present in more than one p_date partition",
+      "count": 3,
+      "share": null
+    },
+    {
+      "issue": "rows with watch_time greater than duration",
+      "count": 219522,
+      "share": 0.27645761680895353
+    },
+    {
+      "issue": "titles containing a line break inside a quoted field",
+      "count": 87,
+      "share": null
+    },
+    {
+      "issue": "hours of the day with no rows",
+      "count": 2,
+      "share": null
+    },
+    {
+      "issue": "fre_community_type holds the literal value 'unknown'",
+      "count": 256974,
+      "share": 0.32362323421736333
+    },
+    {
+      "issue": "fre_city_level holds the literal value 'unknown'",
+      "count": 520,
+      "share": 0.0006548681259311406
+    },
+    {
+      "issue": "category ids appearing more than once in the lookup",
+      "count": 6,
+      "share": null
+    },
+    {
+      "issue": "blank English category labels",
+      "count": 4,
+      "share": null
+    },
+    {
+      "issue": "English labels with a leading space",
+      "count": 786,
+      "share": null
+    },
+    {
+      "issue": "transcript files whose name matches no video id",
+      "count": 1,
+      "share": null
+    }
+  ]
+}
