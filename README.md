@@ -40,6 +40,8 @@ static file would not demonstrate or support that operating model.
 | `interaction_sampled.csv` | CSV | 794,053 rows / 129,483 real events (7 days: 2022-09-16 → 2022-09-22) | Primary fact source: user–video exposure events |
 | `categories_cn_en.csv` | CSV | 826 rows | Category id → Chinese/English label lookup |
 | `asr_en/*.txt` | Plain text | 10 files | Sample video transcripts (English), joined onto videos by filename = `pid` |
+| `jsonplaceholder.typicode.com/posts/1` | JSON (REST API) | 1 record | Programmatic ingestion requirement (mock rules) |
+| `date.nager.at/api/v3/PublicHolidays` | JSON (REST API) | Array | China Public Holidays metadata (programmatic) |
 
 Full provenance, access notes, and how to place these under `data/` are in
 [`docs/data-sources-setup.md`](docs/data-sources-setup.md). Full profiling — nulls, ranges,
