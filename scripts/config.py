@@ -38,6 +38,7 @@ SOURCE_DATA_DIR = _path("SOURCE_DATA_DIR", "data")
 RAW_DATA_DIR = _path("RAW_DATA_DIR", "raw")
 STAGING_DATA_DIR = _path("STAGING_DATA_DIR", "staging")
 CURATED_DATA_DIR = _path("CURATED_DATA_DIR", "curated")
+OUTPUTS_DIR = _path("OUTPUTS_DIR", "outputs")
 LOG_DIR = _path("LOG_DIR", "logs")
 SQL_DIR = ROOT / "sql"
 

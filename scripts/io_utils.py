@@ -110,6 +110,13 @@ def list_staged_dates():
 
 # ---------------- curated layer ----------------
 
+def list_curated_dates(table="interactions_curated"):
+    root = CURATED_DATA_DIR / table
+    if not root.exists():
+        return []
+    return sorted(d.name.split("=", 1)[1] for d in root.glob("p_date=*") if (d / "data.parquet").exists())
+
+
 def curated_fact_path(table, p_date):
     return CURATED_DATA_DIR / table / f"p_date={p_date}" / "data.parquet"
 
