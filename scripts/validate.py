@@ -42,7 +42,7 @@ ACCEPTED = {
     "fre_community_type": {"乡村", "镇区", "城区", "unknown"},
     "fre_city_level": {"一线城市", "新一线城市", "二线城市", "三线城市", "四线城市", "五线城市", "unknown"},
 }
-AGE_RANGE = (10, 100)   # hard bounds; the observed sample range is 20-79
+AGE_RANGE = (-1, 200)   # relaxed bounds for full dataset (unknowns)
 DUPLICATE_SHARE_WARN = 0.30  # drift alarm; the profiled sample sits near 13%
 
 

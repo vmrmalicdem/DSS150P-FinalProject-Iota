@@ -48,6 +48,8 @@ duplicates, and every data-quality issue found — is in
 
 ## 3. Architecture & technology stack
 
+*Please see [docs/architecture.md](docs/architecture.md) for the visual architecture diagram and [docs/data-flow.md](docs/data-flow.md) for the data flow and lineage diagram.*
+
 ```
 data_sources/ (CSV, CSV, TXT)
         │  scripts/ingest.py

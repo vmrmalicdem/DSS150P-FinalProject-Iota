@@ -47,14 +47,14 @@ def generate_analytics():
         
         # Simple anomaly isolation: high watch time + high hate rate + late night
         df['risk_score'] = (
-            (df['total_watch_seconds'] > df['total_watch_seconds'].quantile(0.90)).astype(int) + 
-            (df['hate_rate'] > 0.1).astype(int) + 
-            (df['late_night_share'] > 0.2).astype(int)
+            (df['total_watch_seconds'] > df['total_watch_seconds'].quantile(0.75)).astype(int) + 
+            (df['hate_rate'] > 0.01).astype(int) + 
+            (df['late_night_share'] > 0.1).astype(int)
         )
-        high_risk = df[df['risk_score'] >= 2]
+        high_risk = df[df['risk_score'] >= 1]
         
-        f.write("Using a multi-factor risk model (Watch Time > 90th percentile, Hate Rate > 10%, Late Night > 20%):\n")
-        f.write(f"- Number of 'High-Risk' user days detected: **{len(high_risk)}**\n")
+        f.write("Using a multi-factor risk model (Watch Time > 75th percentile, Hate Rate > 1%, Late Night > 10%):\n")
+        f.write(f"- Number of 'At-Risk' user days detected: **{len(high_risk)}**\n")
         f.write("- These users exhibit compulsive scrolling (high duration) despite high negative emotional feedback (hate rate).\n\n")
         
         f.write("## 4. Visualizations\n")

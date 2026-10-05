@@ -20,6 +20,7 @@ Usage:
 """
 
 import csv
+csv.field_size_limit(2147483647)
 import json
 import shutil
 import sys
