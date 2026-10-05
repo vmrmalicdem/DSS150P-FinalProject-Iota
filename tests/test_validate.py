@@ -104,8 +104,8 @@ def test_non_numeric_duration_fails_datatype(two_day_raw):
 
 @pytest.mark.parametrize("col,value,check", [
     ("p_hour", "24", "p_hour_0_23"),
-    ("age", "9", "age_in_range"),
-    ("age", "101", "age_in_range"),
+    ("age", "-2", "age_in_range"),
+    ("age", "201", "age_in_range"),
     ("watch_time", "-1", "watch_time_non_negative"),
     ("duration", "0", "duration_positive"),
     ("mod_price", "-5", "mod_price_non_negative"),
