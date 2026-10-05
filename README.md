@@ -86,10 +86,25 @@ Docker Compose  (docker-compose.yml)  runs Postgres, Airflow metadata DB, webser
 
 ```
 .
-├── Dockerfile, docker-compose.yml, .dockerignore   containerized environment
 ├── .env.example                                    configuration template (copy to .env)
-├── requirements.txt
+├── .github/workflows/tests.yml                     CI: runs the suite against a PostgreSQL service on every push
 ├── dags/short_video_risk_dag.py                    Airflow DAG
+├── data/                                           lightweight source assets (place the 1.4GB interaction_sampled.csv here locally)
+├── docker-compose.yml, Dockerfile, .dockerignore   containerized environment
+├── docs/
+│   ├── data-sources-setup.md         source provenance & how to place data/
+│   ├── source-profiling-report.md    full profiling of the actual source files
+│   ├── data-dictionary.md            field-level docs for every curated table
+│   ├── data-contract-daily-user-features.md
+│   ├── transformation-spec.md        exact cleaning/dedup/feature rules
+│   ├── format-comparison-and-partitioning.md   file-format trade-offs and partitioning, with measured results
+│   ├── erd.puml / erd.svg / erd.png  ER diagram (PlantUML source and renders)
+│   └── erd.md                        ER diagram notes, keys and rules
+├── live_demo.ipynb                                 Interactive Jupyter demo for the presentation
+├── outputs/benchmarks/                             committed benchmark results (JSON + Markdown)
+├── pytest.ini, requirements-dev.txt                test configuration and dev dependencies
+├── raw/, staging/, curated/                        pipeline data (gitignored contents)
+├── requirements.txt
 ├── scripts/
 │   ├── config.py            environment/config loading
 │   ├── io_utils.py           shared path/partition helpers
@@ -103,22 +118,7 @@ Docker Compose  (docker-compose.yml)  runs Postgres, Airflow metadata DB, webser
 │   ├── partition_demo.py     reading one partition vs scanning everything
 │   └── bench_utils.py        timing helpers shared by the two benchmark scripts
 ├── sql/schema.sql, sql/queries.sql                 DDL and representative queries
-├── tests/                                          pytest suite (see section 12)
-├── pytest.ini, requirements-dev.txt                test configuration and dev dependencies
-├── .github/workflows/tests.yml                     CI: runs the suite against a PostgreSQL service on every push
-├── docs/
-│   ├── data-sources-setup.md         source provenance & how to place data/
-│   ├── source-profiling-report.md    full profiling of the actual source files
-│   ├── data-dictionary.md            field-level docs for every curated table
-│   ├── data-contract-daily-user-features.md
-│   ├── transformation-spec.md        exact cleaning/dedup/feature rules
-│   ├── format-comparison-and-partitioning.md   file-format trade-offs and partitioning, with measured results
-│   ├── erd.puml / erd.svg / erd.png  ER diagram (PlantUML source and renders)
-│   └── erd.md                        ER diagram notes, keys and rules
-├── live_demo.ipynb                                 Interactive Jupyter demo for the presentation
-├── raw/, staging/, curated/                        pipeline data (gitignored contents)
-├── outputs/benchmarks/                             committed benchmark results (JSON + Markdown)
-└── data/                                           lightweight source assets (place the 1.4GB interaction_sampled.csv here locally)
+└── tests/                                          pytest suite (see section 12)
 ```
 
 ## 5. Installation & prerequisites
