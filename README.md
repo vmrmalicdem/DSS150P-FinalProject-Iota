@@ -115,9 +115,10 @@ Docker Compose  (docker-compose.yml)  runs Postgres, Airflow metadata DB, webser
 │   ├── format-comparison-and-partitioning.md   file-format trade-offs and partitioning, with measured results
 │   ├── erd.puml / erd.svg / erd.png  ER diagram (PlantUML source and renders)
 │   └── erd.md                        ER diagram notes, keys and rules
+├── live_demo.ipynb                                 Interactive Jupyter demo for the presentation
 ├── raw/, staging/, curated/                        pipeline data (gitignored contents)
 ├── outputs/benchmarks/                             committed benchmark results (JSON + Markdown)
-└── data/                                    you create this locally, see docs/data-sources-setup.md
+└── data/                                           lightweight source assets (place the 1.4GB interaction_sampled.csv here locally)
 ```
 
 ## 5. Installation & prerequisites
