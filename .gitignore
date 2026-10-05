@@ -36,3 +36,6 @@ data/interaction_sampled.csv
 # Docker
 *.log
 docs/project-updates-oct-5.md
+
+# Project Guidelines
+Data_Engineering_Project_Guidelines_and_Rubrics.*
