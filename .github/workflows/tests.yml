@@ -1,0 +1,40 @@
+name: tests
+
+# Runs the whole suite on every push and pull request, against a real PostgreSQL service
+# container so the load / rerun-safety tests execute instead of being skipped.
+on:
+  push:
+  pull_request:
+
+jobs:
+  pytest:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_DB: shortvideo_risk
+          POSTGRES_USER: pipeline_user
+          POSTGRES_PASSWORD: ci_only_password   # throwaway database inside the CI job
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U pipeline_user -d shortvideo_risk"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      POSTGRES_HOST: localhost
+      POSTGRES_PORT: "5432"
+      POSTGRES_DB: shortvideo_risk
+      POSTGRES_USER: pipeline_user
+      POSTGRES_PASSWORD: ci_only_password
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: requirements-dev.txt
+      - run: pip install -r requirements-dev.txt
+      - run: python -m pytest
