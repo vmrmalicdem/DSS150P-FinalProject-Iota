@@ -8,10 +8,10 @@ their own local copy before running `scripts/ingest.py`.
 ## What you need
 
 Per `docs/transformation-spec.md` and earlier project planning, place these
-under a local `data_sources/` folder at the repo root (already gitignored):
+under a local `data/` folder at the repo root (already gitignored):
 
 ```
-data_sources/
+data/
 ├── interaction_sampled.csv
 ├── categories_cn_en.csv
 └── asr_en/
@@ -39,7 +39,7 @@ cp .env.example .env   # if you haven't already
 python scripts/ingest.py
 ```
 
-This reads from `SOURCE_DATA_DIR` (default `./data_sources`) and writes a
+This reads from `SOURCE_DATA_DIR` (default `./data`) and writes a
 partitioned raw layer into `RAW_DATA_DIR` (default `./raw`, also gitignored).
 Ingestion metadata (batch id, timestamp, row/file counts, any errors) is
 logged to `raw/_ingestion_log/ingestion_log.jsonl`.
@@ -80,7 +80,7 @@ The Airflow DAG (`dags/short_video_risk_dag.py`) calls the same functions, one d
 
 ## Running the pipeline under Airflow in Docker (Day 4)
 
-Prerequisites: Docker with Compose v2, and the source files in `data_sources/` (see above).
+Prerequisites: Docker with Compose v2, and the source files in `data/` (see above).
 
 ```bash
 cp .env.example .env        # then set the three change_me_* passwords; on Linux set AIRFLOW_UID=$(id -u)
@@ -123,5 +123,5 @@ Stop with `docker compose down`; add `-v` to also delete the warehouse and Airfl
 
 Notes
 - The DAG reads `POSTGRES_HOST=postgres` from Compose; do not change it to `localhost` inside containers.
-- Only `raw/`, `staging/`, `curated/`, `logs/` and `data_sources/` hold data, and all are gitignored.
+- Only `raw/`, `staging/`, `curated/`, `logs/` and `data/` hold data, and all are gitignored.
 - Database passwords in `.env.example` are placeholders for local development only.

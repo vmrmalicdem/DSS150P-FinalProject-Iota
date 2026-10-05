@@ -41,7 +41,7 @@ static file would not demonstrate or support that operating model.
 | `categories_cn_en.csv` | CSV | 826 rows | Category id → Chinese/English label lookup |
 | `asr_en/*.txt` | Plain text | 10 files | Sample video transcripts (English), joined onto videos by filename = `pid` |
 
-Full provenance, access notes, and how to place these under `data_sources/` are in
+Full provenance, access notes, and how to place these under `data/` are in
 [`docs/data-sources-setup.md`](docs/data-sources-setup.md). Full profiling — nulls, ranges,
 duplicates, and every data-quality issue found — is in
 [`docs/source-profiling-report.md`](docs/source-profiling-report.md).
@@ -51,7 +51,7 @@ duplicates, and every data-quality issue found — is in
 *Please see [docs/architecture.md](docs/architecture.md) for the visual architecture diagram and [docs/data-flow.md](docs/data-flow.md) for the data flow and lineage diagram.*
 
 ```
-data_sources/ (CSV, CSV, TXT)
+data/ (CSV, CSV, TXT)
         │  scripts/ingest.py
         ▼
 raw/  (Parquet, partitioned by p_date, one partition per calendar day, immutable once written)
@@ -105,7 +105,7 @@ Docker Compose  (docker-compose.yml)  runs Postgres, Airflow metadata DB, webser
 ├── pytest.ini, requirements-dev.txt                test configuration and dev dependencies
 ├── .github/workflows/tests.yml                     CI: runs the suite against a PostgreSQL service on every push
 ├── docs/
-│   ├── data-sources-setup.md         source provenance & how to place data_sources/
+│   ├── data-sources-setup.md         source provenance & how to place data/
 │   ├── source-profiling-report.md    full profiling of the actual source files
 │   ├── data-dictionary.md            field-level docs for every curated table
 │   ├── data-contract-daily-user-features.md
@@ -115,14 +115,14 @@ Docker Compose  (docker-compose.yml)  runs Postgres, Airflow metadata DB, webser
 │   └── erd.md                        ER diagram notes, keys and rules
 ├── raw/, staging/, curated/                        pipeline data (gitignored contents)
 ├── outputs/benchmarks/                             committed benchmark results (JSON + Markdown)
-└── data_sources/                                    you create this locally, see docs/data-sources-setup.md
+└── data/                                    you create this locally, see docs/data-sources-setup.md
 ```
 
 ## 5. Installation & prerequisites
 
 - Docker Desktop (or Docker Engine + Compose v2) — for the full Airflow + Postgres setup
 - Python 3.11+ — only needed if running the pipeline scripts directly, outside Docker
-- The three source files, placed under `data_sources/` per
+- The three source files, placed under `data/` per
   [`docs/data-sources-setup.md`](docs/data-sources-setup.md) (this folder is gitignored and
   not part of the repository, since the interaction file is ~160 MB)
 
@@ -137,7 +137,7 @@ password. Key variables:
 | Variable | Purpose |
 | --- | --- |
 | `POSTGRES_HOST`, `POSTGRES_PORT`, `POSTGRES_DB`, `POSTGRES_USER`, `POSTGRES_PASSWORD` | warehouse connection. Compose overrides `POSTGRES_HOST` to `postgres` inside containers — leave it as `localhost` in `.env` for running scripts directly on your own machine |
-| `SOURCE_DATA_DIR`, `RAW_DATA_DIR`, `STAGING_DATA_DIR`, `CURATED_DATA_DIR` | pipeline paths, default to `./data_sources`, `./raw`, `./staging`, `./curated`; `OUTPUTS_DIR` (default `./outputs`) receives benchmark results |
+| `SOURCE_DATA_DIR`, `RAW_DATA_DIR`, `STAGING_DATA_DIR`, `CURATED_DATA_DIR` | pipeline paths, default to `./data`, `./raw`, `./staging`, `./curated`; `OUTPUTS_DIR` (default `./outputs`) receives benchmark results |
 | `AIRFLOW_UID` | on Linux, set to your host user id (`id -u`) so files written into the mounted volumes stay owned by you; leave at `50000` on Windows/macOS |
 | `AIRFLOW_DB_PASSWORD`, `AIRFLOW_ADMIN_USER`, `AIRFLOW_ADMIN_PASSWORD` | Airflow's own metadata DB and UI login |
 | `LATE_NIGHT_START_HOUR`, `LATE_NIGHT_END_HOUR`, `SESSION_GAP_SECONDS`, `MIN_USER_EVENTS` | feature-derivation thresholds, see [`docs/transformation-spec.md`](docs/transformation-spec.md) §5 |
@@ -198,7 +198,7 @@ python scripts/run_pipeline.py --all                    # every raw partition, o
 python scripts/run_pipeline.py --date 20220918          # a single partition
 python scripts/run_pipeline.py --all --skip-load        # stop after curation, don't touch Postgres
 ```
-The first run against an empty `raw/` ingests from `data_sources/`; on later runs the raw
+The first run against an empty `raw/` ingests from `data/`; on later runs the raw
 layer is treated as immutable and ingestion is skipped if the partition already exists.
 
 ## 9. Data quality & validation

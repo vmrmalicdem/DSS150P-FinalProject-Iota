@@ -1,0 +1,827 @@
+category_level,category_id,category_name_cn,parent_id,root_id,category_name_en
+2,134,美女,8,8, beauty
+2,577,美食售卖,12,12, gourmet food sales
+3,1256,产品与运营,163,14, Products and Operations
+3,1248,熊猫,183,17, panda
+2,204,理财,22,22, Financial management
+3,1141,花艺,167,15, Floriculture
+2,578,健康售卖,16,16, health-related products
+3,1903,抓娃娃,147,11, Claw doll
+3,2216,魔兽世界,263,3, World of Warcraft
+3,1959,面塑,167,15, Dough sculptures
+2,271,吃鸡游戏,3,3, chicken game
+3,1360,古装片,288,39, costume films
+3,1404,泰国,289,39, Thailand
+2,155,吃播,12,12, eating
+2,276,养成游戏,3,3, Cultivate the game
+2,403,航空航天器,35,35, aerospace spacecraft
+3,2240,植发,114,4, hair implants
+2,565,策略游戏,3,3, strategy games
+3,1063,高尔夫,126,7, golf
+2,100,民族舞,1,1, folk dance
+3,1812,养鸡鸭鹅,158,13, raising chickens ducks and geese
+3,1040,鞋靴,121,5, shoes
+3,1001,田间演唱,109,2, field singing
+3,1242,科技周边,220,27, Tech Peripheral
+2,203,创业,22,22, entrepreneurship
+1,12,美食,12,12, gourmet
+3,1352,谍战片,288,39, spy films
+3,1455,其他看病治病,179,16, other medical treatment
+3,2102,结婚现场,150,11, wedding scene
+3,1373,年代片,288,39, period film
+3,2258,马头琴,110,2, Matouqin
+2,368,动画,20,20, animation
+2,368,动画,20,20, horror films
+3,1265,架子鼓,110,2, drum set
+3,1163,常见疾病,179,16, common diseases
+3,1403,台湾,289,39, Taiwan
+2,561,汽车日常,18,18, Automobile daily
+2,564,其他游戏,3,3, other games
+3,1460,菜肴,153,12, dishes
+3,1393,灾难片,288,39, Disaster movies
+2,158,养殖业,13,13, aquaculture
+3,1392,音乐片,288,39, musical film
+3,1981,产检,213,25, Maternity Examination
+3,1885,写真,369,26, photo
+3,1157,二人转,170,15, duet
+3,2300,市场动态与分析,204,22, Market Dynamics and Analysis
+2,622,老照片,21,21, old photos
+2,183,野生动物,17,17, wildlife
+3,1003,自制音乐,109,2, homemade music
+3,1801,转打火机,321,15, turn the lighter
+2,110,乐器,2,2, instruments
+2,120,时尚穿搭,5,5, fashion wear
+3,2105,剪发,114,4, haircuts
+2,338,实验发明,29,29, Experimental inventions
+2,338,实验发明,29,29, Peace Elite
+3,2259,大提琴,110,2, cello
+3,1259,电脑软件,163,14, Computer software
+2,643,纹绣,4,4,tattoos
+3,2204,其他养殖业,158,13, other aquaculture
+3,1354,动作片,288,39, anime
+3,1862,弹弓,321,15, Slingshot
+2,277,电子竞技,3,3, esports
+3,1357,犯罪片,288,39, crime films
+3,2350,消防工程师,163,14, Fire engineer
+3,1339,荒野行动,271,3, Operation Wilderness
+2,140,搞笑街头采访,9,9, funny street interview
+3,1125,法语,161,14, French
+3,1039,箱包,121,5, bags
+3,1879,口技,1879,1879, ventriloquism
+3,2325,高甜短剧,123,39, Sweet Skits
+2,351,海外游,10,10, overseas travel
+2,336,手机摄影,26,26, mobile photography
+2,264,枪战射击,3,3, gunfight
+3,1396,德国,289,39, Germany
+2,233,宠物,17,17, pets
+2,233,宠物,17,17, under one person
+2,386,职业生活,11,11, Professional Life
+2,232,保健养生,16,16, health and wellness
+3,1958,泥塑,167,15, clay sculpture
+2,632,恋爱游戏,3,3, love game
+2,374,建筑建造,36,36, building construction
+3,1266,手鼓,110,2, tabla
+3,1159,戏曲,170,15, Opera
+3,1059,乒乓球,126,7, table tennis
+3,1337,绝地求生,271,3, PUBG
+3,1853,果蔬,337,12, fruits and veggies
+2,345,拉车游,10,10, pull tour
+3,1126,俄语,161,14, Russian
+1,7,运动,7,7, movement
+3,1834,签名设计,319,15, Signature Design
+3,2221,QQ炫舞,269,3,QQ Dazzle Dance
+3,1818,小说,316,38, Novel
+2,608,高新数码开箱,27,27, Advanced Digital open box
+3,2209,荒野乱斗,431,3,brawl
+2,228,商业法律,30,30, Commercial Law
+3,1052,潜水,129,7, diving
+3,1383,探险片,288,39, Adventure film
+2,104,古风舞蹈,1,1, Ancient dance
+3,1880,绝技,321,15, stunts
+3,2324,恋爱短剧,123,39, love skits
+2,363,爱国,19,19, patriotic
+2,236,即兴舞蹈,1,1, improvisational dance
+3,2317,家纺,373,36, home textiles
+3,2284,冰球,593,7, puck
+2,419,自拍,34,34, selfie
+3,1964,年画,167,15, New Year Pictures
+2,430,回合,3,3, Turn based game
+3,2236,生死狙击,264,3, Life and death sniper
+2,322,心理测试,24,24, psychological tests
+2,354,仿妆,4,4, action movies
+2,354,仿妆,4,4, imitation makeup
+3,1972,养车,253,18, Car maintenance
+3,1238,电脑,220,27, computer
+3,1969,二手车,252,18, used cars
+3,2274,赛艇皮划艇,129,7, rowing and kayaking
+3,1882,魔方,321,15, Rubik's Cube
+3,2208,婴幼儿辅食,214,25, infant complementary food
+2,641,丧系负能量,19,19, loss of negative energy
+3,2256,拇指琴,110,2, thumb piano
+3,2100,婚纱照,150,11, wedding photos
+2,647,动漫解说,20,20, anime commentary
+2,563,游戏广告,3,3, game ads
+2,318,异事,37,37, anomaly
+3,1137,计算机等级,163,14, computer level
+3,1073,轮滑,133,7, roller skating
+3,2357,摩托车赛事,399,18, motorcycle racing
+1,5,穿搭,5,5, wear it
+3,2341,DJ乐器,110,2,DJ instruments
+3,1381,神话片,288,39, Mythological films
+3,1377,枪战片,288,39, Shootout film
+3,1810,养牛羊,158,13, raising cattle and sheep
+3,1252,律师资格,163,14, bar admission
+2,206,伊斯兰教,23,23, Islam
+3,1841,念珠制作,167,15, Rosary making
+2,603,网红,6,6, influencer
+3,2205,内衣,121,5, underwear
+3,1395,罪案片,288,39, crime movies
+3,2200,其他农民工,156,11, other migrant workers
+2,372,装修设计,36,36, Decoration design
+2,395,继承法,30,30, Inheritance law
+3,1106,烘焙,153,12, baking
+1,20,二次元,20,20, quadratic
+2,432,卡牌角色扮演游戏（卡牌RPG）,3,3, Card Role-playing Game (Card RPG)
+2,600,汽车探店,18,18, auto Scout
+3,2206,睡衣,121,5, pajamas
+2,340,骑行游,10,10, cycling tour
+3,1890,股市,204,22, stock market
+2,150,婚礼,11,11, wedding
+3,1074,滑板,133,7, skateboard
+3,1371,冒险片,288,39, Adventure films
+2,109,唱歌,2,2, sing
+2,287,生活小妙招,11,11, Life hacks
+3,1828,手工花,167,15, handmade flowers
+2,240,烹饪教学,12,12, cooking instruction
+2,163,职业教育,14,14, Vocational Education
+3,1823,素描,168,15, sketch
+3,1245,羊驼,183,17, alpaca
+3,1161,肿瘤癌症,179,16, tumor cancer
+3,1889,玩具短剧,214,25, Toy Skits
+3,2223,方舟：生存进化,431,3, Ark: Survival Evolution
+3,1152,简笔画,168,15, stick figure
+3,2358,汽车赛事与拉力赛,399,18, motor racing and rallying
+3,2101,结婚布置,150,11, wedding arrangements
+3,2109,penbeat,110,2,Pen Beat
+2,317,异象,37,37, vision
+3,1457,甜品,153,12, dessert
+2,117,美甲,4,4, nail art
+3,1271,葫芦丝,110,2, fenugreek
+3,1376,奇幻片,288,39, Fantasy films
+3,1064,武术,128,7, martial arts
+3,1378,青春片,288,39, youth films
+3,1237,手机,220,27, cell phone
+1,25,亲子,25,25, parent-child
+3,1045,童装,121,5, children's clothing
+2,187,户外越野,18,18, off-road
+3,2239,王牌战士,264,3,Ace Force
+3,2235,洛克王国,431,3, Locke Kingdom
+3,1101,赶海,147,11, Ganhai
+3,2334,动态漫,368,20, dynamic
+1,16,健康,16,16, healthy
+3,1147,锻造,167,15, forging
+3,1300,穿越火线,264,3, Cross the line of fire
+2,398,民间俗语,38,38, folk saying
+3,1239,相机,220,27, camera
+3,1854,国内时政,224,28, Domestic Affairs
+2,133,街头运动,7,7, street movement
+3,1308,炉石传说,265,3, Hearthstone 
+3,1394,战争片,288,39, War films
+3,1315,QQ飞车,267,3,QQ Speed
+3,1351,传记片,288,39, Biopic
+2,373,家居家饰,36,36, Home furnishings
+3,1804,饮品,153,12, drinks
+3,1356,儿童片,288,39, children's films
+2,663,站内功能与年度影集,34,34, In-site features and annual albums
+3,1319,我的世界,268,3, Minecraft
+2,207,基督教,23,23, Christianity
+2,214,育儿,25,25, parenting
+3,1262,钢琴,110,2, piano
+2,343,迷你厨房,12,12, mini kitchen
+3,2305,琵琶,110,2, lute
+3,2229,阴阳师,430,3, Onmyoji
+3,1454,儿童健康,214,25, Child Health
+2,116,护理,4,4, nursing
+3,2234,逃跑吧少年,431,3, Run away boy
+1,21,历史,21,21, history
+3,1966,漆器,167,15, lacquerware
+3,2328,魔幻短剧,123,39,
+3,1985,产后抑郁,213,25, Postpartum depression
+3,1875,cosplay,195,20, cosplay
+2,572,穿搭售卖,5,5, fashion products
+2,106,宅舞,1,1, house dance
+3,1348,格斗,128,7, fighting
+3,1247,企鹅,183,17, Penguin
+3,2349,代驾司机,386,11, substitute driver
+2,242,音乐教学,2,2, Music Teaching
+2,127,田径,7,7, track and field
+2,329,听书,38,38, listen
+3,1294,DNF,263,3,Dungeon & Fighter
+3,2306,单簧管,110,2, clarinet
+2,129,水上运动,7,7, water sports
+2,407,境内游,10,10, domestic travel
+3,1323,创造与魔法,431,3, Creation and Magic
+2,371,建筑材料,36,36, building materials
+3,1251,财会金融,163,14, Accounting and Finance
+2,201,房产,36,36, real estate
+3,1244,松鼠,183,17,squirrels
+2,258,日常法律,30,30, daily law
+3,1884,手帐,167,15, hand ledger
+2,549,搞笑表情包,9,9,funny memes
+3,1172,乌龟,233,17, Turtle
+2,627,法制日常,30,30,legal daily life
+3,2347,卡丁车,147,11, kart
+3,1878,声优,1878,1878, voice actor
+2,585,美妆评测,4,4, beauty review
+3,1071,蹦极,130,7, bungee jump
+2,162,学业教育,14,14, Academic Education
+2,199,历史事件,21,21, Historical events
+3,1973,汽车配件,253,18, Auto Parts
+3,1240,平衡车,220,27, balance car
+3,2224,Sky光·遇,431,3,Sky light
+3,1830,社会事件,223,28, Social Events
+2,184,爬虫飞虫,17,17, reptiles and flying insects
+3,1800,钻石画,167,15, diamond painting
+2,230,婚姻法律,30,30, Matrimonial law
+3,2215,逆战,264,3, The Reverse
+3,2269,手球,126,7, handball
+2,621,文物与博物馆,21,21, Cultural Relics and Museums
+2,431,冒险游戏,3,3, adventure games
+3,2145,染发烫发,114,4, dye and perm
+2,358,道教,23,23, Taoism
+3,2233,一人之下,111,3,The Outcast
+3,1960,糖塑,167,15, Sugar sculpture
+3,1267,萨克斯,110,2, Saxophone
+2,205,佛教,23,23, Buddhism
+2,239,舞蹈教学,1,1, Ace warrior
+2,239,舞蹈教学,1,1, Dance Teaching
+3,2212,象棋,266,3, chess
+3,1342,英雄联盟,272,3, League of Legends
+1,34,随手拍,34,34, random shot
+3,2310,歌剧交响乐,110,2, Opera symphony
+3,2137,音乐现场,109,2, Music scene
+2,263,大型多人在线游戏（MMO）,3,3, Massively multiplayer Online Games (Mmos)
+2,618,动物训练矫正,17,17, Animal Training and Correction
+2,108,广场舞,1,1, square dance
+3,2318,电力工人,386,11, electric worker
+3,1871,触漫,367,20, Touch Man
+2,387,综艺,6,6, Variety
+2,254,说车评车,18,18, say car review
+3,1389,玄幻片,288,39, Fantasy film
+3,1963,皮影,167,15, Shadow play
+3,1272,4-12岁萌娃,235,25, children ages 4-12
+2,411,辅助生殖,16,16, Assisted reproduction
+3,1898,养花,147,11, Growing flowers
+3,1253,人力资源,163,14, Human resources
+3,1398,韩国,289,39, South Korea
+2,381,非洲生活,11,11, Life in Africa
+3,2207,汽车租赁,252,18, car rental
+1,28,资讯,28,28, information
+3,1858,服装设计,319,15, Fashion Design
+2,648,三农教学,13,13, Agriculture and rural Teaching
+3,2304,加密货币,204,22, cryptocurrencies
+3,1353,动画片,288,39, cartoons
+2,114,美发,4,4, hairdressing
+3,1173,宠物鸟,233,17, pet birds
+2,389,休闲运动,7,7, leisure sports
+2,327,脱口秀,9,9, talk show
+2,325,武器装备,35,35, weapons and equipment
+2,348,教育周边,14,14, Educational peripheries
+3,1121,英语,161,14, English
+3,1131,幼儿教育,162,14, Early Childhood Education
+2,221,科技公司,27,27, technology companies
+1,39,影视和短剧,39,39, films and short plays
+3,1310,斗地主,266,3, Doulandlord
+2,548,搞笑配音,9,9, funny voice acting
+3,1463,饮食,292,12, Diet
+2,540,军人生活,540,540, military life
+2,179,看病治病,16,16, see a doctor
+3,1839,农用机械,157,13, Agricultural Machinery
+2,257,航拍摄影,26,26, aerial photography
+3,2311,平板电脑,220,27, tablet
+3,1846,盲盒盲袋,314,20, blind box and blind bag
+2,362,安全教育,14,14, Safety Education
+3,1807,养猪,158,13, raising pigs
+3,1906,踢毽子,147,11, Kicking shuttlecock
+3,2226,崩坏3,111,3, busted 3
+3,1204,汉服古风,195,20, Hanfu Ancient Style
+2,268,沙盒游戏,3,3, sandbox games
+3,1260,二创音乐,109,2, music of two
+3,1002,室内演唱,109,2, chamber singing
+3,1341,王者荣耀,272,3, Honor of Kings
+3,1250,教师教职,163,14, faculty
+3,2283,冰壶,593,7, curling
+2,631,模拟经营游戏,3,3, Business simulation games
+3,1391,言情片,288,39, romance films
+1,29,科学,29,29, Science
+3,1380,商战片,288,39,Business War Films
+2,185,驯兽表演,17,17, Taming of animals
+3,1372,美食片,288,39, food slices
+2,217,景物摄影,26,26, Scene photography
+3,1153,手绘,168,15, hand-drawn
+3,1822,跳绳,125,7, jump rope
+2,126,球类运动,7,7, ball games
+2,144,自驾游,10,10, road trip
+2,379,美洲生活,11,11, Life in the Americas
+3,1105,火锅,153,12, hot pot
+3,1820,外国史,199,21, Foreign History
+3,1155,硬笔,169,15, hard pen
+3,1206,JK与制服,195,20,JK and uniforms
+3,2214,猫和老鼠,431,3, cat and mouse
+3,1876,模仿,170,15, imitation
+2,593,竞技体育,7,7, Competitive sports
+3,1103,迪厅夜店,147,11, Disco Club
+3,1130,普通话,161,14, Mandarin
+2,581,主机单机游戏,3,3, single console games
+3,1452,软陶,167,15, polymer clay
+3,2315,生活电器,373,36, Household appliances
+1,9,搞笑,9,9, funny
+2,132,滑雪,7,7, skiing
+2,292,美食日常,12,12, Gourmet everyday
+2,267,竞速游戏,3,3, Racing game
+2,330,田园生活,13,13, Pastoral life
+3,1145,刺绣,167,15, embroidery
+3,1158,舞龙舞狮,170,15, Dragon and Lion Dance
+2,102,街舞,1,1, street dance
+2,195,二次元装扮,20,20, quadratic costume
+3,1400,美国,289,39, United States
+2,390,厨房好物,12,12, kitchen goodie
+1,23,宗教,23,23, religion
+2,103,韩舞,1,1, Korean dance
+2,601,明星,6,6, star
+3,1142,折纸,167,15, Origami
+3,1983,月子期,213,25, Menstruate
+3,1359,古代片,288,39, Ancient film
+3,1133,大学教育,162,14, University education
+3,2238,明日方舟,432,3, Ark of Tomorrow
+3,1114,机械工,156,11, Machinists
+3,1246,浣熊,183,17, raccoon 183
+2,131,滑冰,7,7, skating
+3,1974,汽车试验,254,18, Automobile Testing
+3,1128,西班牙语,161,14,Spanish
+3,1936,卡车司机,384,11, truck driver
+3,1124,德语,161,14, German
+2,384,驾驶行业,11,11, driving industry
+3,1257,数据分析,163,14, Data analysis
+3,2213,航海王：燃烧意志,430,3, Nautical King: Burning Will
+2,571,汽车售卖,18,18, car sales
+2,161,语言教育,14,14, Language Education
+3,2227,消消乐,270,3, Xiaoxiao
+3,1273,唢呐,110,2,Suona Music
+2,111,动作角色扮演游戏（ARPG）,3,3, Action Role-playing Games (ARPG)
+2,365,ASMR,37,37,ASMR
+3,2211,CS:GO,264,3,
+3,1362,惊悚片,288,39, thriller
+3,1968,性能改装,186,18, Performance Modification
+2,238,社会摇,1,1, social shake
+3,1979,宠物医生,361,17, Pet Doctor
+3,1358,宫廷片,288,39, Palace Film
+3,1524,其他保健养生,232,16, Other health and wellness
+2,170,表演,15,15, show
+2,573,美妆售卖,4,4, beauty products
+3,1254,建造工程,163,14, construction works
+2,401,传统文化,21,21, Traditional Culture
+3,1043,女装,121,5, women's wear
+3,1821,图书,316,38, Books
+3,1895,家私家具,373,36, furniture
+3,1385,喜剧片,288,39,
+2,160,三农政策,13,13, Agriculture and Rural Policy
+3,1055,足球,126,7, soccer
+3,1136,考事业编,163,14, Examination Career
+3,1331,球球大作战,270,3, ball-ball battle
+2,541,军训,541,541, military training
+2,375,情侣日常,11,11, couples daily
+2,394,消费法,30,30, Consumption Law
+3,2260,芦笙,110,2, Lusheng
+3,1149,国画,168,15, Chinese painting
+3,1171,宠物鱼,233,17, pet fish
+3,1408,中国大陆,289,39, Mainland China
+3,2232,樱花校园模拟器,270,3, Sakura Campus Simulator
+3,1872,少儿动画,368,20, Children's animation
+3,2262,电吹管,110,2, electric blowpipe
+2,596,健康探店,16,16, Health Scouts
+3,1367,科幻片,288,39, Science Fiction
+3,1456,小吃,153,12, snacks
+1,24,星座命理,24,24, astrology
+2,253,养护维修,18,18, maintenance
+2,586,汽车评测,18,18, Car reviews
+2,286,摄影教学,26,26, Teaching Photography
+3,1164,减肥,232,16, weight loss
+3,1365,军旅片,288,39, Military Films
+3,1982,胎教,213,25, Fetal Education
+2,357,动物收留,17,17, animal shelter
+2,333,体操,7,7,gymnastics
+2,543,服装批发,5,5, Clothing wholesale
+3,2222,部落冲突：皇室战争,265,3, Clash of Clans: War Royale
+3,1868,摆牌,321,15, deck
+3,1988,经络按摩,232,16, Meridian Massage
+3,1068,帆板,129,7, windsurfing
+3,1042,服饰,121,5, clothing
+2,378,亚洲生活,11,11, Life in Asia
+2,139,恶作剧,9,9, prank
+3,1984,产后恢复,213,25, Postpartum recovery
+2,247,运动教学,7,7, Movement teaching
+3,2230,大话西游,430,3, A Chinese Odyssey
+2,222,前沿科技,27,27, Frontier technology
+2,123,短剧,39,39, skits
+2,352,国防动态,35,35, Defense Dynamics
+3,1458,面点,153,12, pastry
+2,644,纹身,4,4,tattoos
+2,190,亲情,19,19, kinship
+2,314,宅物潮玩,20,20, Homestead
+2,607,亲子开箱,25,25, parent-child unbox
+1,10,旅游,10,10, travel
+3,1382,生活片,288,39, Life Film
+3,1274,虚拟乐器,110,2, virtual instruments
+3,1044,男装,121,5, men's wear
+3,1301,守望先锋,264,3, Overwatch 264
+2,321,炫技,15,15, showmanship
+3,2217,植物大战僵尸,270,3, Plants vs. Zombies
+3,1805,翼装飞行,130,7, wingsuit flight
+3,1100,钓鱼,147,11, fishing
+3,1977,蛇,184,17, Snake
+3,1802,种田,157,13, farming
+2,118,彩妆,4,4, makeup
+2,620,小测试,24,24, quiz
+1,4,美妆,4,4, beauty
+2,189,爱情,19,19, love
+3,1143,玩泥,167,15, playing in the mud
+3,1893,保险,204,22, Insurance
+2,590,汽车教学,18,18, Automotive Teaching
+2,353,鬼步舞,1,1, ghost walk
+3,2301,理财观与消费投资,204,22, Financial Concepts and Consumption and Investment
+3,2314,水电木工原理,163,14, Principles of Water and Electricity carpentry
+3,2298,养生食疗与饮食禁忌,232,16, Health diet and dietary contraindications
+3,1370,励志片,288,39,inspirational films
+2,629,摩登舞,1,1, Moden
+2,574,高新数码售卖,27,27, Advanced Digital Products
+3,1066,拳击,128,7, boxing
+2,208,星座,24,24, constellations
+3,1132,k12,162,14,k-12
+1,17,动物,17,17, animals
+3,1843,民间故事,329,38, Folktales
+3,1967,外观改装,186,18, Exterior modification
+1,11,生活,11,11, life
+2,154,餐厅,12,12, restaurant
+3,1150,油画,168,15, oil painting
+2,625,法制故事,30,30,law stories
+2,215,亲子周边,215,215, parentage peripheral
+3,2271,相扑,128,7, sumo
+3,2303,个税社保与储蓄,204,22, Personal Tax Social Security and Savings
+3,1886,街拍,369,26, street shot
+3,1838,暖新闻,223,28, Warm News
+2,310,自然地理,29,29, Physical Geography
+2,229,工作法律,30,30, Work Laws
+2,356,动植物与微生物,29,29, Animals Plants and Microorganisms
+2,594,穿搭探店,5,5, the dress shop
+2,231,生活vlog,11,11, living vlog
+2,661,直播通告与回放,34,34, Live broadcast Announcements and replays
+2,412,体检,16,16, physical examination
+1,35,军事,35,35, military
+3,2104,婚礼经验分享,150,11, Wedding experience Sharing
+3,1264,尤克里里,110,2,ukulele
+3,1399,加拿大,289,39, Canada
+1,30,法律,30,30, legal
+3,2275,龙舟,129,7, dragonboat
+3,1965,纸扎,167,15, paper tie
+2,366,心理猎奇,37,37, psychological curiosity
+3,2242,虚拟人物短剧,123,39, Virtual Character skits
+3,1401,欧洲,289,39, Europe
+3,1970,新车,252,18, New car
+3,1167,睡眠,232,16, sleep
+2,617,SCP,37,37,SCP
+3,1344,云顶之弈,272,3, Game of Genting
+2,167,手艺,15,15, craft
+2,402,天气资讯,28,28, Weather Information
+3,1836,平衡堆砌,167,15, balanced pile
+3,2286,举重,593,7, weight lifting
+1,14,教育,14,14, education
+2,251,驾考交规,18,18, driving test rules
+3,1881,转笔,321,15, spin pen
+3,1127,泰语,161,14, Thai
+3,2329,悬疑短剧,123,39, suspense skits
+2,660,现代舞,1,1, modern dance
+3,2251,编发,114,4, braid
+2,235,晒娃,25,25, sun baby
+3,1268,小提琴,110,2, violin
+3,1896,装饰摆件,373,36, decoration
+3,2276,跳水,129,7, diving
+2,361,宠物医美,17,17, Pet Medicine
+3,2103,婚品,150,11,wedding products
+3,2332,空手道,128,7, karate
+3,1166,脱发,232,16, hair loss
+3,1168,猫,233,17, cat
+2,399,汽车赛事,18,18,auto racing
+3,1249,刺猬,183,17, hedgehog
+2,312,征婚交友,19,19, dating
+2,404,广播剧,20,20, radio drama
+2,234,影视综艺,234,234, Film and Television Variety
+3,1369,历史片,288,39, historical films
+2,331,天主教,23,23, Catholic
+3,2342,箫,110,2, flutes
+2,213,孕产,25,25, maternity
+3,1270,古筝,110,2, Guzheng
+3,1397,法国,289,39, France
+3,1459,零食,292,12, snacks
+2,252,汽车买卖,18,18, cars for sale
+2,367,漫画,20,20, Comics
+2,584,游戏教学,3,3, Game teaching
+2,148,古玩收藏,11,11, Antiques Collection
+2,575,房产售卖,36,36, property for sale
+2,168,绘画,15,15, painting
+3,1000,街头演唱,109,2, street singing
+2,582,高新数码评测,27,27, Advanced Digital Review
+2,350,鸡汤励志,19,19, Chicken Soup inspirational
+2,350,鸡汤励志,19,19, romance
+2,337,食材,12,12, ingredients
+3,1255,医师药师,163,14, Physician and Pharmacist
+3,1061,橄榄球,126,7, football
+3,1976,老鼠,183,17, Mice
+2,209,生肖,24,24, zodiac
+3,1183,猴子,183,17, monkey
+3,1269,二胡,110,2, Erhu
+2,377,欧洲生活,11,11, Life in Europe
+2,646,动漫剪辑,20,20, Anime clip
+2,285,后期处理,26,26, post-processing
+3,1402,日本,289,39, Japan
+3,2333,游戏赛事,277,3, game events
+2,364,T台走秀,5,5, runway walk
+3,1062,网球,126,7, tennis
+3,1316,跑跑卡丁车,267,3, run the go-kart
+2,595,美妆探店,4,4, Beauty Shop
+3,1102,棋牌麻将,147,11, Mahjong
+3,1058,排球,126,7, volleyball
+3,1978,蜥蜴,184,17, Lizard
+2,551,二次元配音,20,20, dub in two
+3,1892,基金,204,22, Fund
+1,27,高新数码,27,27, Advanced digital
+3,1957,染布,167,15, Dyed cloth
+2,186,汽车改装,18,18, car modification
+2,599,旅游探店,10,10, travel agent
+3,1338,和平精英,271,3,
+1,1,舞蹈,1,1, dance
+2,157,种植业,13,13, plantation
+2,125,健身,7,7, fitness
+3,1888,儿歌,214,25, Children's Songs
+3,2261,埙,110,2, Xun
+1,19,情感,19,19, emotion
+3,1067,水上飞人,129,7, Aqua man
+2,501,美容美体,4,4, beauty and body
+2,141,城市游,10,10, city tour
+3,1056,篮球,126,7, basketball
+2,105,拉丁舞,1,1, Latin dance
+2,136,搞笑段子,9,9, funny jokes
+3,1852,海鲜,337,12, seafood
+2,169,书法,15,15, calligraphy
+3,1388,校园片,288,39, Campus Film
+3,1054,健身操,125,7, aerobics
+2,342,陌生人社交,19,19, Stranger socializing
+3,1986,新生儿,214,25, Newborn
+3,1160,魔术,170,15, magic
+3,1867,彩虹圈,321,15, rainbow circle
+3,1070,跳伞,130,7, parachuting
+2,397,诗词文学,38,38, Poetry and Literature
+2,623,人物传记,21,21, Biographies
+3,1165,采耳,232,16, Zel
+3,2210,火影忍者,111,3, Naruto
+2,128,搏击运动,7,7, combat sports
+2,193,其他情感,19,19, Other emotions
+2,121,搭配展示,5,5, match display
+1,38,读书,38,38, reading
+3,1384,武侠片,288,39, Wuxia Films
+3,2322,乡村短剧,123,39, country skits
+2,355,肚皮舞,1,1, belly dance
+3,1855,国际时政,224,28, International Current Affairs
+3,1844,美文朗读,329,38, beautiful reading
+2,135,帅哥,8,8, handsome
+3,2218,天涯明月刀,263,3, Moonlight Blade
+3,1355,都市片,288,39, urban film
+3,1980,宠物美容,361,17, Pet Grooming
+3,1837,攀岩,130,7, climbing
+2,598,亲子探店,25,25, Parent shop
+2,246,穿搭教学,5,5, dress up teaching
+3,2253,合奏,110,2, ensemble
+3,1144,雕刻,167,15, engraving
+2,624,刑法,30,30, Criminal Law
+2,156,农民工,11,11, migrant workers
+3,1122,日语,161,14, Japanese
+3,1831,自行车运动,130,7, Cycling
+3,1832,沙画,168,15, sand painting
+3,1322,第五人格,268,3, Fifth personality
+3,2220,NBA,274,3, NBA
+2,332,天文,29,29, Astronomy
+3,2265,健美,125,7, bodybuilding
+2,319,艺术设计,15,15, Art and Design
+3,1368,恐怖片,288,39, horror films
+3,1803,中国史,199,21, History of China
+3,2254,中国鼓,110,2, Chinese drum
+3,1051,健身训练,125,7, fitness training
+2,298,汽车品牌,18,18, car brand
+3,1863,厨师刀工,153,12, Chef's Knife
+2,602,名人,6,6, celebrity
+2,142,山水游,10,10, landscape tour
+3,2320,古风短剧,123,39, Ancient Skits
+2,382,校园生活,11,11, Campus Life
+2,311,职场语录,19,19, Quotes from the Workplace
+3,2316,日用品,373,36, Daily necessities
+2,266,棋牌游戏,3,3, board games
+3,1817,心理咨询,163,14, Psychological counseling
+2,570,生活售卖,11,11, Life for sale
+3,1181,兔子,183,17, rabbit
+3,2352,焊工职业知识,163,14, Occupational Knowledge of welders
+2,313,占卜命运,24,24, Divination of fortune
+3,1877,杂技,170,15, acrobatics
+3,2273,滑水冲浪,129,7, water skiing
+1,15,才艺,15,15, talent
+3,2321,校园短剧,123,39, school skits
+2,270,休闲益智,3,3, casual puzzle
+2,609,二次元开箱,20,20, two dollars out of the box
+1,18,汽车,18,18, car
+3,1405,西班牙,289,39, Spain
+3,1364,剧情片,288,39, feature films
+3,2319,都市短剧,123,39, Urban Skits
+2,328,土地法,30,30, Land Law
+2,589,健康教学,16,16, Health Teaching
+2,323,小品,9,9, skit
+3,1873,青少年动画,368,20, Teen animation
+3,1162,两性健康,179,16, Gender health
+2,628,商业经营,22,22, commercial operations
+3,2219,梦幻西游,430,3, Dream Journey to the West
+1,26,摄影,26,26, photography
+3,2309,长笛,110,2, flute
+3,1390,悬疑片,288,39, mystery film
+3,1827,手机壳diy,167,15, phone case diy
+2,274,体育游戏,3,3, sports games
+3,1975,试驾体验,254,18, Test Drive Experience
+3,1869,logo设计,319,15,logo Design
+1,2,音乐,2,2, music
+2,107,芭蕾舞,1,1, ballet
+1,3,游戏,3,3, game
+3,1330,贪吃蛇大作战,270,3, The Serpent's War
+3,1057,台球,126,7, pool
+2,347,军事冲突,35,35, military conflict
+2,349,健康周边,16,16, health periphery
+3,1987,育儿健康知识,214,25, Parenting Health Knowledge
+3,2106,头发护理,114,4, Hair care
+3,1870,3D画,168,15, 3-D
+3,1826,首饰制作,167,15, Jewelry making
+3,1971,修车,253,18, Car repair
+2,260,炫技漂移,18,18, show-off drift
+2,283,旅游攻略,10,10, Travel Guide
+3,1361,家庭片,288,39, family films
+3,1374,农村片,288,39, rural film
+2,418,无意义视频,34,34,meaningless videos
+3,2331,正能量短剧,123,39, Positive Energy Skit
+2,265,对战卡牌类,3,3,Battle Card Games
+2,619,牲畜,17,17, livestock
+2,583,游戏评测,3,3, game reviews
+3,1104,烧烤,153,12, barbecue
+2,272,多人在线战术竞技游戏（MOBA）,3,3, MOBA (Multiplayer Online Battle Arena)
+3,1859,法制事件,223,28, Legal Affairs
+3,1234,怀孕,213,25, pregnant
+3,2277,柔力球,389,7, Soft ball
+3,2340,男士护肤,115,4, Men's skin care
+3,1075,跑酷,133,7, parkour
+3,2287,赛马马术,593,7, horse riding
+2,500,美睫,4,4, trichiasis
+2,224,时政资讯,28,28, Current Affairs Information
+3,1866,彩铅画,168,15, painted lead
+1,22,财经,22,22, Finance
+2,220,科技数码产品,27,27, technology digital products
+3,2225,决战平安京,272,3, Final Battle Ping 'an Jing
+3,1816,学业考试,162,14, academic examination
+3,1379,热血片,288,39, Blood tablets
+1,6,明星娱乐,6,6, Star Entertainment
+3,1324,元气骑士,431,3, the Knight of Vitality
+2,115,护肤,4,4, skin care
+3,1129,方言,161,14, dialects
+3,1258,编程与开发,163,14, Programming and Development
+2,630,装扮游戏,3,3, dress-up
+3,2351,3D建模,163,14,3D modeling
+3,2323,家庭短剧,123,39, Family skits
+2,147,休闲活动,11,11, leisure activities
+2,269,音乐游戏,3,3, Music games
+3,1148,编织,167,15, weaving
+1,8,颜值,8,8, Good Looks
+1,36,房产家居,36,36, real estate home
+2,545,笑话,9,9, jokes
+2,237,钢管舞,1,1, pole dance
+2,119,医美整形,4,4, Cosmetic Surgery
+3,2312,VR和全息投影,222,27,VR and holographic projection
+3,1170,宠物鼠,233,17, pet rats
+3,2228,堡垒之夜,271,3, Fortnite
+3,2345,剧本杀,147,11, script kill
+3,2267,藤球,126,7, Rattan ball
+3,1386,戏曲片,288,39, Opera
+2,420,城市风景,420,420, cityscape
+2,191,友情,19,19, friendship
+3,1065,跆拳道,128,7, Taekwondo
+3,1947,海员,386,11, Seafarer
+2,576,亲子售卖,25,25, Family Products
+2,605,穿搭开箱,5,5, Fashion Unboxing
+2,597,运动探店,7,7, sports Scout
+3,1205,lolita,195,20,lolita
+2,421,影视剧,39,39, movies and TV series
+3,2326,友情短剧,123,39, friendship skits
+3,1146,陶艺,167,15, Pottery
+3,1060,羽毛球,126,7, badminton
+3,1406,香港,289,39, Hong Kong
+3,2252,口琴,110,2, harmonica
+3,1182,鱼,183,17, fish
+3,2268,曲棍球,126,7, hockey
+1,37,奇人异象,37,37, Strange People and Extraordinary Phenomena
+2,410,消费眼科,16,16, Consumer Ophthalmology
+3,1312,麻将,266,3, Mahjong
+3,1156,扭秧歌,170,15, Yangko Dance
+3,2231,逆水寒,263,3, cold against the water
+3,1041,配饰,121,5, accessories
+3,1905,捕鱼,147,11, Fishing
+2,188,用车知识,18,18, car knowledge
+3,1340,香肠派对,271,3, sausage party
+3,2128,塔罗牌,313,24, Tarot
+3,1833,肉类,337,12, meat
+3,1236,早教幼教,214,25, Early Childhood Education
+2,130,极限运动,7,7, extreme sports
+3,1320,迷你世界,268,3, Mini World
+2,210,面相手相,24,24, face to hand
+2,587,美食评测,12,12, Food review
+2,406,住宿,10,10, accommodation
+3,2285,射箭,593,7, archery
+3,2270,柔道,128,7, judo
+2,626,财产法律,30,30, Property Law
+2,606,美食开箱,12,12, food unboxing
+3,1154,软笔,169,15, soft pen
+3,1887,亲子周边,214,25, parent-child periphery
+3,1407,印度,289,39, India
+3,1375,偶像片,288,39, Idol films
+3,1451,滴胶,167,15, dripping glue
+2,297,美妆开箱,4,4, beauty out of the box
+2,552,魔法表情,20,20, magic expression
+3,2282,击剑,593,7, fencing
+3,2257,手碟,110,2, hand plate
+3,1366,军事片,288,39, Military films
+3,1363,警匪片,288,39, Cop Show
+2,223,社会资讯,28,28, Social Information
+2,245,美妆教学,4,4, Beauty teaching
+2,562,车展资讯,18,18, Auto Show Information
+3,2201,工程机械,156,11, Construction Machinery
+3,2203,其他种植业,157,13, Other crops
+3,1263,吉他,110,2, guitar
+1,13,三农,13,13, agriculture
+3,1069,游泳,129,7, swimming
+3,2112,笛子,110,2, flute
+2,591,高新数码教学,27,27, Advanced Digital education
+3,1464,鸟,183,17, bird
+3,1321,明日之后,431,3, After Tomorrow
+3,1883,悠悠球,321,15, Yo-yo
+3,1387,仙侠片,288,39, Fairy Films
+2,550,二次元酷图,20,20, quadratic cool map
+3,1233,备孕,213,25, pregnancy
+2,324,相声,9,9, crosstalk
+3,1850,滑翔伞,130,7, paragliding
+2,369,人物摄影,26,26, People Photography
+2,143,沿海游,10,10, coastal tour
+2,281,户外探险,10,10, outdoor adventure
+3,1123,韩语课,161,14, Korean class
+2,339,软件产品,27,27, Software products
+3,1135,考公务员,163,14, civil service exam
+3,1286,超级马里奥,111,3, Super Mario
+3,1243,考拉,183,17, Koala
+3,2237,王牌战争：文明重启,271,3, Ace Wars: Civilization Reboot
+3,2307,手风琴,110,2, accordion
+2,642,小故事,19,19, short story
+2,653,舞蹈与艺考,1,1, Dance and Arts
+3,1231,0-3岁萌宝,235,25,0-3 years old cute baby
+3,2288,射击,593,7, fire
+3,1894,信用卡,204,22, credit card
+3,1949,军人生活,1949,1949, Military Life
+2,316,阅读,38,38, reading
+2,153,烹饪,12,12, cooking
+3,1053,瑜伽,125,7, Yoga
+3,1349,剪纸,167,15, paper cut
+2,101,手势舞,1,1, hand dance
+3,1819,橡皮章,167,15, rubber stamp
+3,1169,狗,233,17, dog
+3,1461,烹调,292,12, cooking
+3,1948,外卖员,386,11, delivery man
+2,273,战争游戏,3,3, War games
+3,2278,响鞭,389,7, Ringing whip
+3,1409,王者模拟战,272,3, King Simulator
+3,2272,摔跤,128,7, wrestling
+2,396,收养法,30,30, Adoption Law
+3,1350,爱情片,288,39,romance films
+3,1904,品茶,147,11, Tea tasting
+3,1465,亲子用品,1465,1465, paternity products
+2,588,穿搭评测,5,5, wear evaluation
+3,1241,其他数码,220,27, other numbers
+2,359,单反摄影,26,26, SLR photography
+3,1961,糖画,167,15, sugar painting
+2,341,奇人,37,37, Unusual people
+3,2346,彩票,147,11, lottery
+3,1956,休闲蹦床,389,7, recreational trampoline
+3,2348,塔吊司机,386,11, tower crane driver
+3,2139,易经,313,24, I Ching
+3,2308,双簧管,110,2, oboe
+3,2266,棒垒球,126,7, baseball and softball
+3,2356,方程式赛车,399,18, Formula 3
+3,2330,逆袭短剧,123,39, Counterattack Shorts

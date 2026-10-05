@@ -1,7 +1,7 @@
 """
 Day 2 ingestion script (Person A).
 
-Reads source files from SOURCE_DATA_DIR (default: ./data_sources, gitignored -
+Reads source files from SOURCE_DATA_DIR (default: ./data, gitignored -
 never committed, since the interaction file is ~160MB and exceeds what should
 ever go into this git repo) and writes a partitioned raw layer into RAW_DATA_DIR
 (default: ./raw, also gitignored per the Day 1 .gitignore).

@@ -16,7 +16,7 @@ a full run on the real dataset (7 daily partitions).
 
 | Format | Where | Why this format here |
 | --- | --- | --- |
-| **CSV** | `data_sources/*.csv` (input); `raw/interactions/p_date=*/interactions.csv` (7 files); `raw/categories/categories_cn_en.csv` | The raw layer stays source-faithful: every value is kept as the original text, with no type guessing. Splitting by date (and stripping the file's byte-order mark) are the only changes. |
+| **CSV** | `data/*.csv` (input); `raw/interactions/p_date=*/interactions.csv` (7 files); `raw/categories/categories_cn_en.csv` | The raw layer stays source-faithful: every value is kept as the original text, with no type guessing. Splitting by date (and stripping the file's byte-order mark) are the only changes. |
 | **Plain text** | `raw/transcripts/asr_en/<pid>.txt` (10 files) | Kept exactly as delivered. |
 | **JSON** | `staging/_validation/{raw,staged,curated}_<date>.json` (21 files); `staging/_stats/stage_<date>.json` (7 files) | Validation reports and run statistics are small, nested and meant to be read by people and by tools. |
 | **JSON Lines** | `raw/_ingestion_log/ingestion_log.jsonl` | An append-only lineage log: one event per line, so a new batch is one appended line and never a rewrite. |

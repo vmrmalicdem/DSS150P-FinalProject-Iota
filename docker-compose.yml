@@ -27,7 +27,7 @@ x-airflow-common: &airflow-common
     PIPELINE_SCRIPTS_DIR: /opt/airflow/project/scripts
     PYTHONPATH: /opt/airflow/project/scripts
   volumes:
-    - ./:/opt/airflow/project          # code, sql, raw/, staging/, curated/, data_sources/, logs/
+    - ./:/opt/airflow/project          # code, sql, raw/, staging/, curated/, data/, logs/
     - ./logs/airflow:/opt/airflow/logs # Airflow task logs
   depends_on:
     airflow-db:
@@ -78,7 +78,7 @@ services:
     command:
       - -c
       - |
-        mkdir -p /opt/airflow/project/{raw,staging,curated,logs/airflow,data_sources}
+        mkdir -p /opt/airflow/project/{raw,staging,curated,logs/airflow,data}
         chown -R "${AIRFLOW_UID:-50000}:0" /opt/airflow/project/{raw,staging,curated,logs}
         exec /entrypoint airflow version
     environment:

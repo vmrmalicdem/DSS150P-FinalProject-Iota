@@ -34,7 +34,7 @@ def _path(name, default):
     return p if p.is_absolute() else (ROOT / p).resolve()
 
 
-SOURCE_DATA_DIR = _path("SOURCE_DATA_DIR", "data_sources")
+SOURCE_DATA_DIR = _path("SOURCE_DATA_DIR", "data")
 RAW_DATA_DIR = _path("RAW_DATA_DIR", "raw")
 STAGING_DATA_DIR = _path("STAGING_DATA_DIR", "staging")
 CURATED_DATA_DIR = _path("CURATED_DATA_DIR", "curated")

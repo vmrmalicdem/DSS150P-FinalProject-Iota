@@ -1,6 +1,6 @@
 # Source Profiling Report
 
-Profiled directly against the files in `data_sources/`: `interaction_sampled.csv`,
+Profiled directly against the files in `data/`: `interaction_sampled.csv`,
 `categories_cn_en.csv`, and `asr_en/*.txt`, read exactly as delivered and before any
 transformation. Every figure below is produced by `scripts/profile_sources.py` and can be
 regenerated:
