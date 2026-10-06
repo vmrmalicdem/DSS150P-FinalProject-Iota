@@ -1,0 +1,91 @@
+{
+  "user_day_records": 5533,
+  "distinct_users": 1442,
+  "dates": [
+    "20220916",
+    "20220917",
+    "20220918",
+    "20220919",
+    "20220920",
+    "20220921",
+    "20220922"
+  ],
+  "avg_daily_watch_seconds": 192.6,
+  "median_daily_watch_seconds": 112.0,
+  "p90_daily_watch_seconds": 486.0,
+  "max_session_seconds": 1003.0,
+  "no_watch_time_user_days": 196,
+  "late_night_heavy_user_days": 142,
+  "late_night_heavy_distinct_users": 110,
+  "watch_cutoff_seconds": 272.0,
+  "flag_any_1plus": 1547,
+  "flag_2plus": 98,
+  "flag_all_3": 0,
+  "flag_counts": {
+    "high_watch": 1383,
+    "hate_rate": 13,
+    "late_night": 249
+  },
+  "per_date": [
+    {
+      "p_date": "20220916",
+      "user_days": 831,
+      "users": 831,
+      "avg_watch": 217.5,
+      "late_night_user_days": 19
+    },
+    {
+      "p_date": "20220917",
+      "user_days": 838,
+      "users": 838,
+      "avg_watch": 219.7,
+      "late_night_user_days": 23
+    },
+    {
+      "p_date": "20220918",
+      "user_days": 865,
+      "users": 865,
+      "avg_watch": 209.3,
+      "late_night_user_days": 25
+    },
+    {
+      "p_date": "20220919",
+      "user_days": 761,
+      "users": 761,
+      "avg_watch": 186.0,
+      "late_night_user_days": 22
+    },
+    {
+      "p_date": "20220920",
+      "user_days": 791,
+      "users": 791,
+      "avg_watch": 197.5,
+      "late_night_user_days": 12
+    },
+    {
+      "p_date": "20220921",
+      "user_days": 744,
+      "users": 744,
+      "avg_watch": 162.9,
+      "late_night_user_days": 16
+    },
+    {
+      "p_date": "20220922",
+      "user_days": 703,
+      "users": 703,
+      "avg_watch": 143.4,
+      "late_night_user_days": 25
+    }
+  ],
+  "raw_partitions": [
+    "20220916",
+    "20220917",
+    "20220918",
+    "20220919",
+    "20220920",
+    "20220921",
+    "20220922"
+  ],
+  "missing_curated_partitions": [],
+  "min_events": 1
+}
