@@ -58,6 +58,6 @@ graph TD
 
 ## Component Roles
 1. **Airflow (Orchestration):** Manages the daily incremental processing dependencies, ensuring tasks are run in the correct order (`Ingest -> Stage -> Curate -> Validate -> Load`).
-2. **Local Storage (Data Lake):** Uses a directory structure to mimic object storage (S3/GCS). We utilize CSV for immutable raw landing and Parquet for optimized columnar staging and curated storage.
+2. **Local Storage (Data Lake):** Uses a directory structure to mimic object storage (S3/GCS). We utilize CSV for source-faithful raw landing (the Airflow DAG skips a partition that already exists) and Parquet for optimized columnar staging and curated storage.
 3. **PostgreSQL (Data Warehouse):** Serves as the relational structured storage where curated dimension and fact tables are exposed for SQL consumption.
 4. **Jupyter (Analytics):** The downstream consumption environment for deriving behavioral insights.

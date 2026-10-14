@@ -1,56 +1,56 @@
 {
-  "generated_at": "2026-10-03T02:26:39.304050+00:00",
+  "generated_at": "2026-10-14T10:35:31.727074+00:00",
   "p_date": "20220919",
   "repeats": 15,
   "machine": {
-    "platform": "Linux-6.18.44-fc-v64-x86_64-with-glibc2.39",
-    "python": "3.12.3",
-    "pandas": "2.1.4",
-    "pyarrow": "19.0.0",
-    "cpu_count": 1
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.13.0",
+    "pandas": "3.0.5",
+    "pyarrow": "25.0.1",
+    "cpu_count": 8
   },
   "identical_results": true,
   "partition_stats": [
     {
       "p_date": "20220916",
       "rows": 22533,
-      "bytes": 597826,
+      "bytes": 599464,
       "share_of_rows": 0.17402284469775955
     },
     {
       "p_date": "20220917",
       "rows": 23439,
-      "bytes": 624969,
+      "bytes": 626607,
       "share_of_rows": 0.18101990222654712
     },
     {
       "p_date": "20220918",
       "rows": 22130,
-      "bytes": 598127,
+      "bytes": 599765,
       "share_of_rows": 0.17091046701111343
     },
     {
       "p_date": "20220919",
       "rows": 17268,
-      "bytes": 472406,
+      "bytes": 474042,
       "share_of_rows": 0.13336113621093115
     },
     {
       "p_date": "20220920",
       "rows": 17739,
-      "bytes": 479233,
+      "bytes": 480869,
       "share_of_rows": 0.1369986793633141
     },
     {
       "p_date": "20220921",
       "rows": 13869,
-      "bytes": 389073,
+      "bytes": 390709,
       "share_of_rows": 0.10711058594564538
     },
     {
       "p_date": "20220922",
       "rows": 12505,
-      "bytes": 356828,
+      "bytes": 358462,
       "share_of_rows": 0.09657638454468927
     }
   ],
@@ -59,17 +59,17 @@
     {
       "strategy": "Partition read",
       "description": "read only this day's file",
-      "seconds": 0.004861572999999453,
+      "seconds": 0.004250300000421703,
       "rows_returned": 17268,
       "files_read": 1,
       "rows_read": 17268,
       "bytes_read": 463797,
-      "speedup_vs_full_scan": 7.729109076425111
+      "speedup_vs_full_scan": 8.738606685855077
     },
     {
       "strategy": "Full scan + filter",
       "description": "read every day's file, then filter",
-      "seconds": 0.03757562799999903,
+      "seconds": 0.03714170000057493,
       "rows_returned": 17268,
       "files_read": 7,
       "rows_read": 129483,
@@ -79,39 +79,39 @@
     {
       "strategy": "Single file, default row groups",
       "description": "one Parquet file, pushed-down filter",
-      "seconds": 0.01618987599999855,
+      "seconds": 0.01081990000056976,
       "rows_returned": 17268,
       "files_read": 1,
       "rows_read": 129483,
-      "bytes_read": 3149809,
-      "speedup_vs_full_scan": 2.3209336501405198
+      "bytes_read": 3089552,
+      "speedup_vs_full_scan": 3.4327211895321676
     },
     {
       "strategy": "Single file, one row group per day",
       "description": "one Parquet file, pushed-down filter",
-      "seconds": 0.005291214999999738,
+      "seconds": 0.005501600000570761,
       "rows_returned": 17268,
       "files_read": 1,
       "rows_read": 17268,
-      "bytes_read": 463797,
-      "speedup_vs_full_scan": 7.101512223563187
+      "bytes_read": 463647,
+      "speedup_vs_full_scan": 6.751072414701484
     }
   ],
   "raw_csv": [
     {
       "strategy": "Raw CSV: one partition",
       "description": "read only this day's CSV",
-      "seconds": 0.2615680919999974,
+      "seconds": 0.4860880000014731,
       "rows_returned": 106439,
       "files_read": 1,
       "rows_read": 106439,
       "bytes_read": 21534832,
-      "speedup_vs_full_scan": 8.498660065922808
+      "speedup_vs_full_scan": 8.119431872396174
     },
     {
       "strategy": "Raw CSV: read all, filter",
       "description": "read every day's CSV, then filter",
-      "seconds": 2.222978298000001,
+      "seconds": 3.946758400001272,
       "rows_returned": 106439,
       "files_read": 7,
       "rows_read": 794053,
