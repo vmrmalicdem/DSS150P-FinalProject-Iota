@@ -32,6 +32,28 @@ data/
 Source: [tsinghua-fib-lab/ShortVideo_dataset](https://github.com/tsinghua-fib-lab/ShortVideo_dataset).
 The tiny sample (no credentials required) is linked from that repo's README.
 
+## Exact input used for the reported results
+
+Reported numbers (794,053 rows; 129,483 events; 25,109 user-days) come from this exact file:
+
+| Item | Value |
+| --- | --- |
+| Upstream repo | https://github.com/tsinghua-fib-lab/ShortVideo_dataset |
+| Upstream commit | `6bd97f13a620f429745b24a17897457a75054052` (upstream HEAD when checked; confirm it is the version you downloaded from) |
+| File | `interaction_sampled.csv` (about 160 MB, 794,053 rows, 28 columns) |
+| Direct download | Tiny version, no login: the Dropbox link in the upstream README (see its first paragraphs) |
+| SHA-256 | ` 96CADB70829E853B8D7797BC566928ECEEB670F19A8A0B92DBFA58B32372BF87` |
+
+Compute the checksum on the file you used:
+
+```bash
+sha256sum data/interaction_sampled.csv                 # Linux / macOS
+Get-FileHash data\interaction_sampled.csv -Algorithm SHA256   # PowerShell
+```
+
+After placing the file, a matching checksum plus `794,053` rows from `python scripts/ingest.py`
+confirms you have the same input.
+
 ## Running ingestion
 
 ```bash

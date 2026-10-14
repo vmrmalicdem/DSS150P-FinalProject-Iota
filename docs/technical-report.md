@@ -17,7 +17,7 @@ We sourced data from the Tsinghua FIB Lab `ShortVideo_dataset`, supplemented by 
 ## 3. Architecture and Implementation
 The architecture follows a classic layered Data Engineering approach (Raw -> Staging -> Curated), orchestrated by Apache Airflow and containerized via Docker. (See `docs/architecture.md` and `docs/data-flow.md` for visual diagrams).
 
-*   **Ingestion:** Python scripts fetch the CSV/TXT files and the REST API JSON, writing them immutably to the Raw layer, partitioned by `p_date`.
+*   **Ingestion:** Python scripts fetch the CSV/TXT files and the REST API JSON, writing them to the source-faithful Raw layer, partitioned by `p_date`.
 *   **Staging:** We deduplicate exact rows, collapse tag-level fan-out, cast data types, and resolve cross-partition ownership anomalies (keeping events in their earliest partition).
 *   **Curation:** We derive critical behavioral features: `watch_ratio`, `is_rewatch_flagged`, `late_night_share`, `max_session_seconds`, and `hate_rate`.
 

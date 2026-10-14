@@ -2,7 +2,8 @@
 
 An end-to-end data engineering pipeline that turns raw short-video interaction logs into
 daily, per-user behavioral features — things like late-night usage share, session counts,
-and rewatch/hate rates — loaded into PostgreSQL for downstream risk scoring.
+and rewatch/hate rates — loaded into PostgreSQL as a feature layer for future risk-scoring work. The current outputs are
+behavioral features and an exploratory screen, not detected addiction or a validated risk measure.
 
 ## 1. Problem statement & objectives
 
@@ -10,13 +11,12 @@ Short-video platforms generate huge volumes of raw interaction events (exposures
 time, likes, hates, follows) that are not usable on their own: one CSV row is one *tag* on
 one exposure, not one user action, and the file mixes true user behavior with a large
 proportion of exact duplicate rows. Before any downstream consumer — a risk model, a
-reporting dashboard, an analyst — can ask "which users show risky late-night binge
-patterns?", the data needs to be de-duplicated, collapsed into real events, and aggregated
+reporting dashboard, an analyst — can ask "which users concentrate their viewing late at night?", the data needs to be de-duplicated, collapsed into real events, and aggregated
 into daily per-user features.
 
 **Objective:** build an automated, rerun-safe pipeline that ingests the raw source files,
 validates them, and produces a daily `daily_user_features` table in PostgreSQL suitable as
-input to a future user-risk model.
+a possible input to a future user-risk model.
 
 **Target consumer:** a downstream risk-scoring process (the `risk_scores` table exists in
 the schema as the intended target; the scoring method itself is out of scope for this
@@ -40,8 +40,15 @@ static file would not demonstrate or support that operating model.
 | `interaction_sampled.csv` | CSV | 794,053 rows / 129,483 real events (7 days: 2022-09-16 → 2022-09-22) | Primary fact source: user–video exposure events |
 | `categories_cn_en.csv` | CSV | 826 rows | Category id → Chinese/English label lookup |
 | `asr_en/*.txt` | Plain text | 10 files | Sample video transcripts (English), joined onto videos by filename = `pid` |
-| `jsonplaceholder.typicode.com/posts/1` | JSON (REST API) | 1 record | Programmatic ingestion requirement (mock rules) |
-| `date.nager.at/api/v3/PublicHolidays` | JSON (REST API) | Array | China Public Holidays metadata (programmatic) |
+
+**API ingestion demonstration (not part of the data product).** The two REST sources below
+satisfy the programmatic-ingestion requirement. They are ingested into `raw/` with lineage logging,
+but no curated table or feature in `daily_user_features` uses them.
+
+| Source | Format | Role |
+| --- | --- | --- |
+| `jsonplaceholder.typicode.com/posts/1` | JSON (REST API) | Mock record; demonstrates API ingestion only |
+| `date.nager.at/api/v3/PublicHolidays` | JSON (REST API) | China public-holiday metadata; ingested, not joined into curated features |
 
 Full provenance, access notes, and how to place these under `data/` are in
 [`docs/data-sources-setup.md`](docs/data-sources-setup.md). Full profiling — nulls, ranges,
@@ -56,7 +63,7 @@ duplicates, and every data-quality issue found — is in
 data/ (CSV, CSV, TXT)
         │  scripts/ingest.py
         ▼
-raw/  (Parquet, partitioned by p_date, one partition per calendar day, immutable once written)
+raw/  (CSV / TXT / JSON, source-faithful, partitioned by p_date, one partition per calendar day)
         │  scripts/validate.py  (schema, type, range, uniqueness, referential, business-rule checks)
         ▼
 staging/  (Parquet: dedup'd, standardized, cross-partition ownership resolved)
@@ -77,7 +84,7 @@ Docker Compose  (docker-compose.yml)  runs Postgres, Airflow metadata DB, webser
 | Layer | Technology | Why |
 | --- | --- | --- |
 | Ingestion / transformation | Python (pandas) | Row-level and columnar operations needed for dedup, joins, and feature derivation |
-| Storage (raw/staging/curated) | Parquet, partitioned by `p_date` | Columnar, compressed, supports reading a single date without a full scan |
+| Storage | Raw: CSV/TXT/JSON (source-faithful). Staging and curated: Parquet. All partitioned by `p_date` | Raw stays identical to the source; Parquet is columnar, compressed, and supports reading a single date without a full scan |
 | Structured storage | PostgreSQL | Constraints, foreign keys, and SQL querying for the curated output |
 | Orchestration | Apache Airflow | Task dependencies, retries, scheduling, and per-partition backfill (`catchup=True`) |
 | Containerization | Docker / Docker Compose | Reproducible environment; Postgres, Airflow, and the pipeline code all run the same way on any machine |
@@ -89,7 +96,7 @@ Docker Compose  (docker-compose.yml)  runs Postgres, Airflow metadata DB, webser
 ├── .env.example                                    configuration template (copy to .env)
 ├── .github/workflows/tests.yml                     CI: runs the suite against a PostgreSQL service on every push
 ├── dags/short_video_risk_dag.py                    Airflow DAG
-├── data/                                           lightweight source assets (place the 1.4GB interaction_sampled.csv here locally)
+├── data/                                           lightweight source assets (place the ~160 MB interaction_sampled.csv here locally)
 ├── docker-compose.yml, Dockerfile, .dockerignore   containerized environment
 ├── docs/
 │   ├── data-sources-setup.md         source provenance & how to place data/
@@ -219,7 +226,7 @@ rather than continuing on bad data. Known non-fatal data-quality findings (e.g. 
 
 | Output | Location |
 | --- | --- |
-| Raw Parquet, one partition per `p_date` | `raw/interactions/p_date=YYYYMMDD/` |
+| Raw CSV, one partition per `p_date` | `raw/interactions/p_date=YYYYMMDD/` |
 | Staging Parquet (deduplicated, standardized) | `staging/interactions/p_date=YYYYMMDD/` |
 | Curated fact tables | `curated/interactions_curated/p_date=.../`, `curated/daily_user_features/p_date=.../` |
 | Curated dimensions (rebuilt whole each run) | `curated/dims/{users,videos,categories,video_categories}.parquet` |
@@ -239,7 +246,7 @@ ingestion log. Fact tables are partitioned by `p_date`, one file per day.
 
 ```bash
 python scripts/run_pipeline.py --all --skip-load            # build the layers first
-python scripts/benchmark_formats.py --repeats 5             # CSV vs JSON vs Parquet
+python scripts/benchmark_formats.py --dataset both --repeats 5   # CSV vs JSON vs Parquet (curated and staged)
 python scripts/partition_demo.py --date 20220919 --repeats 15   # one partition vs full scan
 ```
 
@@ -247,12 +254,12 @@ Headline results on the real data (129,483 curated events; timings are machine-d
 
 | Measure | Result |
 | --- | --- |
-| Parquet size vs CSV | 0.18x (3.2 MB vs 17.9 MB); JSON is 2.5x CSV |
-| Parquet full read vs CSV | 6.2x faster; JSON is 5.1x slower than CSV |
-| Parquet 3-column read vs CSV | 27x faster |
-| Schema preserved on round trip | Parquet: 18/18 columns identical; CSV: 16/18 (the `p_date` timestamp comes back as text) |
-| Read one day, partitioned Parquet vs full scan | 7.7x faster (17,268 rows read instead of 129,483) |
-| Read one day, raw CSV partition vs all CSVs | 8.5x faster (21.5 MB instead of 160.7 MB) |
+| Parquet size vs CSV | 0.17x (3.1 MB vs 18.0 MB, snappy; 2.6 MB with zstd); JSON is 2.5x CSV |
+| Parquet full read vs CSV | about 22x faster (snappy 22.4x, zstd 23.6x); JSON is 3.3x–4.1x slower than CSV |
+| Parquet 3-column read vs CSV | about 44x faster (snappy 43.6x, zstd 43.4x) |
+| Schema preserved on round trip | Parquet: 18/18 columns identical; CSV and JSON: 16/18 (the `p_date` timestamp comes back as text or an integer, and `watch_ratio` shifts at the ~1e-15 level) |
+| Read one day, partitioned Parquet vs full scan | 8.7x faster (17,268 rows read instead of 129,483) |
+| Read one day, raw CSV partition vs all CSVs | 8.1x faster (21.5 MB instead of 160.7 MB) |
 
 The full analysis (trade-offs, why `p_date` is the partition key, and an honest comparison with a single
 well-built Parquet file) is in [`docs/format-comparison-and-partitioning.md`](docs/format-comparison-and-partitioning.md).
